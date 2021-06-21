@@ -8,6 +8,7 @@ function PostShow() {
     async function fetchData() {
       const response = await fetch("/api/posts");
       const responseData = await response.json();
+      console.log("-----------------------", responseData)
       setPosts(responseData.posts);
     }
     fetchData();
@@ -16,10 +17,10 @@ function PostShow() {
   const postComponents = posts.map((post) => {
     return (
       <li key={post.id}>
-        {/* <NavLink to={`/users/${user.id}`}>{user.username}</NavLink> */}
         <p>Test Stuff</p>
-        <p>{post.image_src}</p>
+        <NavLink to={`/posts/${post.id}`}><img src={post.image_src}></img></NavLink>
         <p>{post.caption}</p>
+
       </li>
     );
   });

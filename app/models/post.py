@@ -7,7 +7,7 @@ class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     image_src = db.Column(db.String(255), nullable=False, unique=True)
-    caption = db.Column(db.String(255), nullable=True)
+    _caption = db.Column(db.String(255), nullable=True)
     num_of_likes = db.Column(db.Integer)
     num_of_hates = db.Column(db.Integer)
     # come back to add a GPS location/coords
@@ -18,7 +18,7 @@ class Post(db.Model):
 
     @property
     def caption(self):
-        return self.caption
+        return self._caption
 
     @property
     def likes(self):
@@ -33,8 +33,8 @@ class Post(db.Model):
         self.image_src = image
 
     @caption.setter
-    def caption(self, caption):
-        self.caption = caption
+    def caption(self, new_caption):
+        self._caption = new_caption
 
     @likes.setter
     def likes(self, likes):
@@ -51,7 +51,7 @@ class Post(db.Model):
             "id": self.id,
             "user_id": self.user_id,
             "image_src": self.image_src,
-            "caption": self.caption,
+            "caption": self._caption,
             "num_of_likes": self.num_of_likes,
             "num_of_hates": self.num_of_hates
         }

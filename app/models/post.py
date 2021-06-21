@@ -1,5 +1,6 @@
 from .db import db
 
+
 class Post(db.Model):
     __tablename__ = 'posts'
 
@@ -9,6 +10,7 @@ class Post(db.Model):
     caption = db.Column(db.String(255), nullable=True)
     num_of_likes = db.Column(db.Integer)
     num_of_hates = db.Column(db.Integer)
+    # come back to add a GPS location/coords
 
     @property
     def image(self):
@@ -45,11 +47,11 @@ class Post(db.Model):
     user = db.relationship("User", back_populates="post")
 
     def to_dict(self):
-            return {
-                "id": self.id,
-                "user_id": self.user_id,
-                "image_src": self.image_src,
-                "caption": self.caption,
-                "num_of_likes": self.num_of_likes,
-                "num_of_hates": self.num_of_hates
-            }
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "image_src": self.image_src,
+            "caption": self.caption,
+            "num_of_likes": self.num_of_likes,
+            "num_of_hates": self.num_of_hates
+        }

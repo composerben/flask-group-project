@@ -31,7 +31,7 @@ PyJWT = "==1.7.1"
 [dev-packages]
 autopep8 = "*"
 pylint = "*"
-psycopg2 = "*"
+psycopg2-binary = "*"
 
 [requires]
 python_version = "3.9"

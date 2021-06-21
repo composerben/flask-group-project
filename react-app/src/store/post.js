@@ -1,10 +1,16 @@
 const GET_POST = "post/SET_POST";
 const REMOVE_POST = "post/REMOVE_POST";
+const POST_POST = "post/POST";
 
 const getPosts = (posts) => ({
   type: GET_POST,
   posts,
 });
+
+const postPost = (post) => ({
+  type: POST_POST,
+  post
+})
 
 export const getAllPosts = () => async (dispatch) => {
   const response = await fetch("/api/posts");
@@ -12,6 +18,22 @@ export const getAllPosts = () => async (dispatch) => {
 
   dispatch(getPosts(data));
 };
+
+export const postOnePost = (data) => async (dispatch) => {
+  const res = await fetch('/api/posts', {
+    method: 'POST',
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data)
+  })
+
+  if (res.ok) {
+    const post = await res.json()
+
+    dispatch(postPost(post))
+  }
+}
 
 const initialState = {};
 

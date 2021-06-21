@@ -11,7 +11,7 @@ post_routes = Blueprint("posts", __name__)
 @login_required
 def posts():
     posts = Post.query.all()
-    return {"users": [post.to_dict() for post in posts]}
+    return {"posts": [post.to_dict() for post in posts]}
 
 
 # POST /api/posts

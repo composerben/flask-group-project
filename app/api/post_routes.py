@@ -15,7 +15,7 @@ def posts():
 
 
 # POST /api/posts
-@post_routes.route("/", methods=["POST"])
+@post_routes.route("", methods=["POST"])
 @login_required
 def post_posts():
     form = PostForm()
@@ -26,6 +26,9 @@ def post_posts():
             image_src=form.data['image_src'],
             caption=form.data['caption'],
         )
+        print("*********************", post)
         db.session.add(post)
         db.session.commit()
+    if not form.errors:
+        return "no errors"
     return {"errors": form.errors}

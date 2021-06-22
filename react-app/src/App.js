@@ -6,6 +6,7 @@ import NavBar from "./components/NavBar";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import PostShow from "./components/PostShow";
 import User from "./components/User";
+import PostForm from "./components/PostForm"
 import { authenticate } from "./store/session";
 import { useDispatch } from "react-redux";
 
@@ -37,6 +38,9 @@ function App() {
         </Route>
         <ProtectedRoute path="/posts" exact={true}>
           <PostShow />
+        </ProtectedRoute>
+        <ProtectedRoute path="/new-post" exact={true}>
+          <PostForm />
         </ProtectedRoute>
         <ProtectedRoute path="/users/:userId" exact={true}>
           <User />

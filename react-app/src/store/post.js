@@ -45,6 +45,10 @@ export default function postReducer(state = initialState, action){
         allPosts[post.id] = post;
       });
       return allPosts;
+    case POST_POST:
+      const newState = {...state}
+      newState[action.newState] = action.newState;
+      return newState
     default:
       return state;
   }

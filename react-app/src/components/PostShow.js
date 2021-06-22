@@ -8,7 +8,7 @@ function PostShow() {
   const dispatch = useDispatch();
   const history = useHistory();
   const [posts, setPosts] = useState([]);
-  const statePosts = useSelector(state => state.posts)
+  const statePosts = useSelector(state => state.postReducer)
 
   useEffect(() => {
     // async function fetchData() {
@@ -20,18 +20,18 @@ function PostShow() {
     dispatch(getAllPosts())
   }, [dispatch]);
 
-  const onDelete = (post) => {
-    dispatch(deleteOnePost(post.id))
-    history.push("/posts")
-  }
+  // const onDelete = async (post) => {
+  //   await dispatch(deleteOnePost(post.id))
+  //   history.push("/posts")
+  // }
 
-  const postComponents = posts.map((post) => {
+  const postComponents = Object.values(statePosts).map((post) => {
     return (
       <li key={post.id}>
         <p>Test Stuff</p>
         <NavLink to={`/posts/${post.id}`}><img src={post.image_src}></img></NavLink>
         <p>{post.caption}</p>
-        <button onClick={() => onDelete(post)}>Delete</button>
+        {/* <button onClick={() => onDelete(post)}>Delete</button> */}
 
       </li>
     );

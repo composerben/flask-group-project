@@ -1,6 +1,7 @@
 const GET_POST = "post/SET_POST";
 const DELETE_POST = "post/DELETE_POST";
 const POST_POST = "post/POST";
+// const GET_POST_BY_USER = "post/GET_POST_BY_USER"
 
 const getPosts = (posts) => ({
   type: GET_POST,
@@ -22,8 +23,15 @@ export const getAllPosts = () => async (dispatch) => {
   const data = await response.json();
 
   console.log("----------------", data)
-  dispatch(getPosts(data));
+  dispatch(getPosts(data.posts));
 };
+
+export const getPostsByUserId = (userId) => async (dispatch) => {
+  const res = await fetch(`/api/users/${userId}/posts`);
+  const data = await res.json();
+
+  dispatch(getPosts(data.posts))
+}
 
 export const postOnePost = (data) => async (dispatch) => {
   const res = await fetch('/api/posts', {
@@ -42,19 +50,12 @@ export const postOnePost = (data) => async (dispatch) => {
   }
 }
 
-export const deleteOnePost = (data) => async (dispatch) => {
-  const res = await fetch(`/api/posts/${data}`, {
-    method: "DELETE",
-    body: JSON.stringify(data),
-    headers: {
-      "Content-Type": "application/json"
-    }
+export const deleteOnePost = (postId) => async (dispatch) => {
+  const res = await fetch(`/api/posts/${postId}`, {
+    method: "DELETE"
   })
   if (res.ok) {
-    const post = await res.json()
-    console.log("------------------------", post)
-
-    dispatch(deletePost(post))
+    dispatch(deletePost(postId))
   }
 }
 
@@ -69,20 +70,20 @@ export default function postReducer(state = initialState, action){
       });
       return allPosts;
     }
-
-    
     case POST_POST: {
       const newState = {...state}
       newState[action.newState] = action.newState;
       return newState
     }
-
-    
     case DELETE_POST: {
       const newState = {...state}
-      delete newState[action.data.id];
+      delete newState[action.post];
       return newState
     }
+    // case GET_POST_BY_USER: {
+    //   const newState = {...state}
+    //   action.posts.forEach((post))
+    // }
 
     default:
       return state;

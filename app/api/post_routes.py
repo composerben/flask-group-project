@@ -40,5 +40,4 @@ def delete_posts(id):
     post = Post.query.get(id)
     db.session.delete(post)
     db.session.commit()
-    
-    
+    return {'message': 'success'}

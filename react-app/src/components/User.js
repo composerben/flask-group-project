@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteOnePost, getPostsByUserId } from "../store/post"
+import UserPostForm from "./UserPost";
 
 function User() {
   const [user, setUser] = useState({});
@@ -37,14 +38,21 @@ function User() {
     await dispatch(deleteOnePost(post.id))
   }
 
+  const onEdit = async (post) => {
+    // await dispatch(editOnePost(post.id))
+  }
+
   const postComponents = Object.values(userPosts).map((post) => {
     return (
       <li key={post.id}>
         <p>Test Stuff</p>
         <img src={post.image_src}></img>
         <p>{post.caption}</p>
+        <div>
+          <UserPostForm post={post} />
+        </div>
         <button onClick={() => onDelete(post)}>Delete</button>
-
+        <button onClick={() => onEdit(post)}>Edit</button>
       </li>
     );
   });

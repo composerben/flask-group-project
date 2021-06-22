@@ -1,6 +1,7 @@
 const GET_POST = "post/SET_POST";
 const DELETE_POST = "post/DELETE_POST";
 const POST_POST = "post/POST";
+const EDIT_POST = "post/EDIT_POST";
 // const GET_POST_BY_USER = "post/GET_POST_BY_USER"
 
 const getPosts = (posts) => ({
@@ -18,6 +19,11 @@ const deletePost = (post) => ({
   post
 })
 
+const editPost = (post) => ({
+  type: EDIT_POST,
+  post
+})
+
 export const getAllPosts = () => async (dispatch) => {
   const response = await fetch("/api/posts");
   const data = await response.json();
@@ -31,6 +37,19 @@ export const getPostsByUserId = (userId) => async (dispatch) => {
   const data = await res.json();
 
   dispatch(getPosts(data.posts))
+}
+
+export const editOnePost = (postId, caption) => async (dispatch) => {
+  const res = await fetch(`/api/posts/${postId}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(caption)
+  });
+  const data = await res.json();
+
+  dispatch(editPost(data.post))
 }
 
 export const postOnePost = (data) => async (dispatch) => {
@@ -80,11 +99,15 @@ export default function postReducer(state = initialState, action){
       delete newState[action.post];
       return newState
     }
-    // case GET_POST_BY_USER: {
-    //   const newState = {...state}
-    //   action.posts.forEach((post))
-    // }
-
+    case EDIT_POST: {
+      const newState = {...state}
+      console.log("the state ->>", newState)
+      const theId = action.post.id
+      const theCaption = action.post.caption
+      console.log("the action ->>", action)
+      newState[theId]["caption"] = theCaption
+      return newState
+    }
     default:
       return state;
   }

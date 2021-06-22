@@ -33,7 +33,8 @@ def post_posts():
         return "no errors"
     return {"errors": form.errors}
 
-# DELETE /api/posts
+
+# DELETE /api/posts/:id
 @post_routes.route("/<int:id>", methods=["DELETE"])
 @login_required
 def delete_posts(id):
@@ -41,3 +42,18 @@ def delete_posts(id):
     db.session.delete(post)
     db.session.commit()
     return {'message': 'success'}
+
+
+# PATCH /api/posts/:id
+@post_routes.route("/<int:id>", methods=["PATCH"])
+@login_required
+def edit_post(id):
+    print("Made it into the edit_post route")
+    post = Post.query.get(id)
+    # this_data = request.json.get()
+    request_body = request.get_json()
+    print("***********************", request_body)
+    post._caption = request_body
+    # post.caption = request.json.get("caption", post.caption)
+    db.session.commit()
+    return {'post': post.to_dict()}

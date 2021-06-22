@@ -32,3 +32,13 @@ def post_posts():
     if not form.errors:
         return "no errors"
     return {"errors": form.errors}
+
+# DELETE /api/posts
+@post_routes.route("/<int:id>", methods=["DELETE"])
+@login_required
+def delete_posts(id):
+    post = Post.query.get(id)
+    db.session.delete(post)
+    db.session.commit()
+    
+    

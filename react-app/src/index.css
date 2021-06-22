@@ -1,1 +1,5 @@
 /* TODO Add site wide styles */
+body{
+    background-image: url("https://static.independent.co.uk/2021/04/05/12/SWNS_SOCIETY_PHOTOS_03.jpg?width=982&height=726&auto=webp&quality=75");
+    overflow: hidden;
+}

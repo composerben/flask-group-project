@@ -6,21 +6,28 @@ import { postOnePost } from '../store/post.js'
 export default function PostForm() {
     const [image, newImage] = useState('')
     const [caption, newCaption] = useState('')
+    const [errors, setErrors] = useState('')
     const userId = useSelector(state => state.session.user.id)
     const dispatch = useDispatch();
     const history = useHistory();
 
     function submitForm(e) {
         e.preventDefault()
-        const data = {image_src: image, userId, caption};
-
-        dispatch(postOnePost(data)).catch(
-            async res => {
-                const data = await res.json()
-            }
-        )
-        history.push("/posts");
-        // window.location.href("/posts")
+        
+        //TODO: MAKE ERRORS, BUT IT WORKS
+        try {
+            dispatch(
+                postOnePost({
+                    image_src: image,
+                    userId,
+                    caption
+                })
+            )
+            history.push("/posts")
+        } catch (e) {
+            let error = new Error(e)
+            console.log(error);
+        }
     }
 
     return (

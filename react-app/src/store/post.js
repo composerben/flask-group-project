@@ -32,6 +32,7 @@ export const postOnePost = (data) => async (dispatch) => {
     const post = await res.json()
 
     dispatch(postPost(post))
+    return post
   }
 }
 

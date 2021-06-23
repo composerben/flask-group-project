@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { likePost, hatePost } from "../store/post_reaction";
+// import { likePost, hatePost } from "../store/post_reaction";
+import { likePost, hatePost } from "../store/post";
 
 export default function PostReaction({postId}) {
   //   const [reaction, setReaction] = useState(null);
@@ -11,11 +12,13 @@ export default function PostReaction({postId}) {
   const userId = useSelector((state) => state.session.user.id)
 
   function onLike() {
-    dispatch(likePost(userId, postId))
+    console.log("\n\npostId----->", postId)
+    dispatch(likePost(postId))
   }
 
   function onHate() {
-    dispatch(hatePost(userId, postId))
+    console.log("\n\npostId----->", postId);
+    dispatch(hatePost(postId))
   }
 
   return (

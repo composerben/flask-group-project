@@ -7,52 +7,29 @@ class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     image_src = db.Column(db.String(255), nullable=False, unique=True)
-    _caption = db.Column(db.String(255), nullable=True)
-    num_of_likes = db.Column(db.Integer)
-    num_of_hates = db.Column(db.Integer)
+    caption = db.Column(db.String(255), nullable=True)
     # come back to add a GPS location/coords
 
-    @property
-    def image(self):
-        return self.image_src
-
-    @property
-    def caption(self):
-        return self._caption
-
-    @property
-    def likes(self):
-        return self.num_of_likes
-
-    @property
-    def hates(self):
-        return self.num_of_hates
-
-    @image.setter
-    def image(self, image):
-        self.image_src = image
-
-    @caption.setter
-    def caption(self, new_caption):
-        self._caption = new_caption
-
-    @likes.setter
-    def likes(self, likes):
-        self.num_of_likes = likes
-
-    @hates.setter
-    def hates(self, hates):
-        self.num_of_hates = hates
-
     user = db.relationship("User", back_populates="post")
-    reaction = db.relationship("PostReaction", back_populates="post")
+    reactions = db.relationship("PostReaction", back_populates="post")
+
+    def get_reactions(self):
+        """
+        Gets all reactions, returns in dictionary.
+        """
+        print([item.reaction for item in self.reactions])
+        return {
+            'likes': len([reaction.reaction for reaction in self.reactions if reaction.reaction is True]),
+            'hates': len([reaction.reaction for reaction in self.reactions if reaction.reaction is False]),
+        }
 
     def to_dict(self):
         return {
             "id": self.id,
             "user_id": self.user_id,
             "image_src": self.image_src,
-            "caption": self._caption,
-            "num_of_likes": self.num_of_likes,
-            "num_of_hates": self.num_of_hates
+            "caption": self.caption,
+            "likes": self.get_reactions()["likes"],
+            "hates": self.get_reactions()["hates"],
+            # "get_reactions": self.get_reactions(),
         }

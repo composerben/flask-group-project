@@ -2,7 +2,12 @@ const GET_POST = "post/SET_POST";
 const DELETE_POST = "post/DELETE_POST";
 const POST_POST = "post/POST";
 const EDIT_POST = "post/EDIT_POST";
-// const GET_POST_BY_USER = "post/GET_POST_BY_USER"
+const UPDATE_REACTION = "reaction/UPDATE_REACTION";
+
+const updateReaction = (reaction) => ({
+  type: UPDATE_REACTION,
+  reaction,
+});
 
 const getPosts = (posts) => ({
   type: GET_POST,
@@ -78,7 +83,35 @@ export const deleteOnePost = (postId) => async (dispatch) => {
   }
 }
 
+export const likePost = (postId) => async (dispatch) => {
+  const response = await fetch(`/api/post_reaction/${postId}/True`, {
+    method: "POST",
+  });
+  if (response.ok) {
+    const reaction = await response.json();
+
+    dispatch(updateReaction(reaction));
+    return reaction;
+  }
+};
+
+export const hatePost = (postId) => async (dispatch) => {
+  const response = await fetch(`/api/post_reaction/${postId}/False`, {
+    method: "POST",
+  });
+  if (response.ok) {
+    const reaction = await response.json();
+
+    dispatch(updateReaction(reaction));
+    return reaction;
+  }
+};
+
 const initialState = {};
+/*
+- use the to_dict method to grab likes/hates from post model
+- key into post state and update the like/hate
+*/
 
 export default function postReducer(state = initialState, action){
   switch (action.type) {
@@ -101,12 +134,20 @@ export default function postReducer(state = initialState, action){
     }
     case EDIT_POST: {
       const newState = {...state}
-      console.log("the state ->>", newState)
       const theId = action.post.id
       const theCaption = action.post.caption
-      console.log("the action ->>", action)
       newState[theId]["caption"] = theCaption
       return newState
+    }
+    case UPDATE_REACTION: {
+      const newState = { ...state };
+      const { post_id: postId } = action.reaction.post_reaction;
+      const { count_likes: countLikes, count_hates: countHates } =
+        action.reaction;
+      newState[postId]["likes"] = countLikes;
+      newState[postId]["hates"] = countHates;
+      // newState[postId]["reaction"] = true;
+      return newState;
     }
     default:
       return state;

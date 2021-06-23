@@ -5,7 +5,7 @@ const DECREMENT = "reaction/DECREMENT";
 
 const likeReaction = (reaction) => ({
   type: INCREMENT,
-  reaction
+  reaction,
 });
 
 const hateReaction = (reaction) => ({
@@ -13,53 +13,34 @@ const hateReaction = (reaction) => ({
   reaction
 });
 
-export const likePost = (userId, postId) => async (dispatch) => {
-  const response = await fetch(`/api/post_reaction/${postId}-${userId}/like`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(userId, postId),
-  });
-  if (response.ok) {
-    const reaction = await response.json();
-    console.log('likePost REAACTION', reaction);
-
-    dispatch(likeReaction(reaction));
-    return reaction;
-  }
-};
-
-export const hatePost = (userId, postId) => async (dispatch) => {
-  const response = await fetch(`/api/post_reaction/${postId}-${userId}/hate`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(userId, postId),
-  });
-  if (response.ok) {
-    const reaction = await response.json();
-
-    dispatch(hateReaction(reaction));
-    return reaction;
-  }
-};
-
 const initialState = {};
+
+// separate likes and hates onto post
+// query likes and hates at page-load
 
 export default function postReactionReducer(state = initialState, action) {
   switch (action.type) {
     case INCREMENT: {
       const newState = { ...state };
-      const {user_id:userId, post_id:postId} = action.reaction.post_reaction;
-      newState[`${postId}`] = {[userId]: {'reaction':true}};
+      const { post_id: postId } = action.reaction.post_reaction;
+      const { count_likes: countLikes, count_hates: countHates } =
+        action.reaction;
+      newState[postId] = {
+        reaction: true,
+        likes: countLikes,
+        hates: countHates,
+      };
       return newState;
     }
     case DECREMENT: {
       const newState = { ...state };
-      const {user_id:userId, post_id:postId} = action.reaction.post_reaction;
-      newState[`${postId}`] = {[userId]: {'reaction':false}};
+      const { post_id: postId } = action.reaction.post_reaction;
+      const { count_likes: countLikes, count_hates: countHates } = action.reaction;
+      newState[postId] = {
+        reaction: true,
+        likes: countLikes,
+        hates: countHates,
+      };
       return newState;
     }
     default:

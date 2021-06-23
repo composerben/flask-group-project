@@ -50,6 +50,6 @@ def edit_post(id):
     print("Made it into the edit_post route")
     post = Post.query.get(id)
     request_body = request.get_json()
-    post._caption = request_body
+    post.caption = request_body
     db.session.commit()
     return {'post': post.to_dict()}

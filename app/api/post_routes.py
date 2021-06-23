@@ -26,7 +26,6 @@ def post_posts():
             image_src=form.data['image_src'],
             caption=form.data['caption'],
         )
-        print("*********************", post)
         db.session.add(post)
         db.session.commit()
     if not form.errors:
@@ -50,10 +49,7 @@ def delete_posts(id):
 def edit_post(id):
     print("Made it into the edit_post route")
     post = Post.query.get(id)
-    # this_data = request.json.get()
     request_body = request.get_json()
-    print("***********************", request_body)
     post._caption = request_body
-    # post.caption = request.json.get("caption", post.caption)
     db.session.commit()
     return {'post': post.to_dict()}

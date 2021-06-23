@@ -23,7 +23,7 @@ class User(db.Model, UserMixin):
         return check_password_hash(self.password, password)
 
     post = db.relationship("Post", back_populates="user")
-    # reaction = db.relationship("PostReaction", secondary=post_reaction, back_populates="user") 
+    post_reaction = db.relationship("PostReaction", back_populates="user")
 
     def to_dict(self):
         return {

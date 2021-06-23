@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteOnePost, getPostsByUserId } from "../store/post"
+import { deleteOnePost, getPostsByUserId } from "../store/post";
 import UserPostForm from "./UserPost";
+import PostReaction from "./PostReaction";
 
 function User() {
   const [user, setUser] = useState({});
@@ -11,15 +12,15 @@ function User() {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const userPosts = useSelector(state => state.postReducer)
+  const userPosts = useSelector((state) => state.postReducer);
 
   // Notice we use useParams here instead of getting the params
   // From props.
-  const { userId }  = useParams();
+  const { userId } = useParams();
 
   useEffect(() => {
     if (!userId) {
-      return
+      return;
     }
     (async () => {
       const response = await fetch(`/api/users/${userId}`);
@@ -35,22 +36,22 @@ function User() {
   }
 
   const onDelete = async (post) => {
-    await dispatch(deleteOnePost(post.id))
-  }
+    await dispatch(deleteOnePost(post.id));
+  };
 
   const onEdit = async (post) => {
     // await dispatch(editOnePost(post.id))
-  }
+  };
 
   const postComponents = Object.values(userPosts).map((post) => {
     return (
       <li key={post.id}>
-        <p>Test Stuff</p>
         <img src={post.image_src}></img>
         <p>{post.caption}</p>
         <div>
           <UserPostForm post={post} />
         </div>
+        <PostReaction />
         <button onClick={() => onDelete(post)}>Delete</button>
         <button onClick={() => onEdit(post)}>Edit</button>
       </li>
@@ -58,9 +59,9 @@ function User() {
   });
   return (
     <>
-    <h1>Post Show: </h1>
-    <ul>{postComponents}</ul>
-  </>
+      <h1>Post Show: </h1>
+      <ul>{postComponents}</ul>
+    </>
     // <ul>
     //   <li>
     //     <strong>User Id</strong> {userId}

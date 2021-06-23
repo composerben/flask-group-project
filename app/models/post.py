@@ -45,7 +45,7 @@ class Post(db.Model):
         self.num_of_hates = hates
 
     user = db.relationship("User", back_populates="post")
-    # reaction = db.relationship("PostReaction", back_populates="user") 
+    reaction = db.relationship("PostReaction", back_populates="post")
 
     def to_dict(self):
         return {

@@ -51,7 +51,7 @@ function User() {
         <div>
           <UserPostForm post={post} />
         </div>
-        <PostReaction />
+        <PostReaction postId={post.id}/>
         <button onClick={() => onDelete(post)}>Delete</button>
         <button onClick={() => onEdit(post)}>Edit</button>
       </li>

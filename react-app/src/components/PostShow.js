@@ -21,7 +21,7 @@ function PostShow() {
           <img src={post.image_src}></img>
         </NavLink>
         <p>{post.caption}</p>
-        <PostReaction />
+        <PostReaction postId={post.id}/>
       </li>
     );
   });

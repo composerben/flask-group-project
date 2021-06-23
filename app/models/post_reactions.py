@@ -7,15 +7,15 @@ class PostReaction(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     post_id = db.Column(db.Integer, db.ForeignKey('posts.id'), nullable=False)
-    reaction = db.Column(db.Boolean, nullable=True)
+    _reaction = db.Column(db.Boolean, nullable=True)
 
     @property
     def reaction(self):
-        return self.reaction
+        return self._reaction
 
     @reaction.setter
     def reaction(self, new_reaction):
-        self.reaction = new_reaction
+        self._reaction = new_reaction
 
     user = db.relationship("User", back_populates="post_reaction")
     post = db.relationship("Post", back_populates="reaction")
@@ -25,5 +25,5 @@ class PostReaction(db.Model):
             "id": self.id,
             "user_id": self.user_id,
             "post_id": self.post_id,
-            "reaction": self.reaction
+            "reaction": self._reaction
         }

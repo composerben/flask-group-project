@@ -3,24 +3,18 @@
 const INCREMENT = "reaction/INCREMENT";
 const DECREMENT = "reaction/DECREMENT";
 
-const likeReaction = (userId, postId) => ({
+const likeReaction = (reaction) => ({
   type: INCREMENT,
-  payload: {
-    userId,
-    postId,
-  },
+  reaction
 });
 
-const hateReaction = (userId, postId) => ({
+const hateReaction = (reaction) => ({
   type: DECREMENT,
-  payload: {
-    userId,
-    postId,
-  },
+  reaction
 });
 
 export const likePost = (userId, postId) => async (dispatch) => {
-  const response = await fetch(`/api/post_reaction/${postId}-${userId}`, {
+  const response = await fetch(`/api/post_reaction/${postId}-${userId}/like`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -29,6 +23,7 @@ export const likePost = (userId, postId) => async (dispatch) => {
   });
   if (response.ok) {
     const reaction = await response.json();
+    console.log('likePost REAACTION', reaction);
 
     dispatch(likeReaction(reaction));
     return reaction;
@@ -36,7 +31,7 @@ export const likePost = (userId, postId) => async (dispatch) => {
 };
 
 export const hatePost = (userId, postId) => async (dispatch) => {
-  const response = await fetch(`/api/post_reaction/${postId}-${userId}`, {
+  const response = await fetch(`/api/post_reaction/${postId}-${userId}/hate`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -57,14 +52,14 @@ export default function postReactionReducer(state = initialState, action) {
   switch (action.type) {
     case INCREMENT: {
       const newState = { ...state };
-      const { postId, userId } = action.payload;
-      newState[postId][userId] = true;
+      const {user_id:userId, post_id:postId} = action.reaction.post_reaction;
+      newState[`${postId}`] = {[userId]: {'reaction':true}};
       return newState;
     }
     case DECREMENT: {
       const newState = { ...state };
-      const { postId, userId } = action.payload;
-      newState[postId][userId] = false;
+      const {user_id:userId, post_id:postId} = action.reaction.post_reaction;
+      newState[`${postId}`] = {[userId]: {'reaction':false}};
       return newState;
     }
     default:

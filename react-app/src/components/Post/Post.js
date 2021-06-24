@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import PostReaction from "../PostReaction";
 import "./post.css";
+import CommentBody from "../CommentBody/CommentBody";
 
 export default function Post({ post }) {
   return (
@@ -11,6 +12,7 @@ export default function Post({ post }) {
       </Link>
       <PostReaction postId={post.id} />
       <p>{post.caption}</p>
+      <CommentBody postId={post.id} />
     </div>
   );
 }

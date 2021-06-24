@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteOnePost, getPostsByUserId } from "../store/post";
-import UserPostForm from "./UserPost";
-import PostReaction from "./PostReaction";
+import { deleteOnePost, getPostsByUserId } from "../../store/post";
+import UserPostForm from "../UserPost";
+import PostReaction from "../PostReaction";
+import Post from "../Post"
+import "./index.css"
 
 function User() {
   const [user, setUser] = useState({});
@@ -13,6 +15,7 @@ function User() {
   const history = useHistory();
 
   const userPosts = useSelector((state) => state.postReducer);
+
 
   // Notice we use useParams here instead of getting the params
   // From props.
@@ -45,16 +48,13 @@ function User() {
 
   const postComponents = Object.values(userPosts).map((post) => {
     return (
-      <li key={post.id}>
-        <img src={post.image_src}></img>
-        <p>{post.caption}</p>
+      <div>
         <div>
-          <UserPostForm post={post} />
+            <UserPostForm post={post} />
+            <button onClick={() => onDelete(post)}>Delete</button>
+            <button onClick={() => onEdit(post)}>Edit</button>
         </div>
-        <PostReaction postId={post.id}/>
-        <button onClick={() => onDelete(post)}>Delete</button>
-        <button onClick={() => onEdit(post)}>Edit</button>
-      </li>
+      </div>
     );
   });
   return (

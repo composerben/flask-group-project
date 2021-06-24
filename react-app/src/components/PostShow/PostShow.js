@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useHistory } from "react-router-dom";
-import { deleteOnePost, getAllPosts } from "../store/post";
+import { deleteOnePost, getAllPosts } from "../../store/post";
 import { useDispatch, useSelector } from "react-redux";
-import PostReaction from "./PostReaction";
+import PostReaction from "../PostReaction";
+import Post from "../Post";
+import "./index.css"
 
 function PostShow() {
   const dispatch = useDispatch();
@@ -16,13 +18,9 @@ function PostShow() {
 
   const postComponents = Object.values(statePosts).map((post) => {
     return (
-      <li key={post.id}>
-        <NavLink to={`/posts/${post.id}`}>
-          <img src={post.image_src}></img>
-        </NavLink>
-        <p>{post.caption}</p>
-        <PostReaction postId={post.id}/>
-      </li>
+      <div>
+        <Post key={post.id} post={post} /> 
+      </div>
     );
   });
 

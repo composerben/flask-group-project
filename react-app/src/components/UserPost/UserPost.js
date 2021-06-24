@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { useSelector, useDispatch} from "react-redux"
-import { editOnePost } from "../store/post";
+import { editOnePost } from "../../store/post";
+import "./index.css"
 
 export default function UserPostForm({post}) {
   const [caption, setCaption] = useState(post.caption)

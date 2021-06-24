@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 // import { likePost, hatePost } from "../store/post_reaction";
-import { likePost, hatePost } from "../store/post";
+import { likePost, hatePost } from "../../store/post";
+import "./index.css"
 
 export default function PostReaction({postId}) {
   //   const [reaction, setReaction] = useState(null);

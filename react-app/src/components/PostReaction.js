@@ -10,6 +10,9 @@ export default function PostReaction({postId}) {
   const history = useHistory();
 
   const userId = useSelector((state) => state.session.user.id)
+  const likeCount = useSelector((state) => state.postReducer[postId].likes)
+  const hateCount = useSelector((state) => state.postReducer[postId].hates)
+
 
   function onLike() {
     console.log("\n\npostId----->", postId)
@@ -27,7 +30,13 @@ export default function PostReaction({postId}) {
         <button onClick={() => onLike()}>Like</button>
       </div>
       <div>
+        Likes: {likeCount}
+      </div>
+      <div>
         <button onClick={() => onHate()}>HATE</button>
+      </div>
+      <div>
+        HATES: {hateCount}
       </div>
     </>
   );

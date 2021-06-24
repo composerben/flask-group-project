@@ -6,7 +6,7 @@ class PostReaction(db.Model):
 
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False,
                         primary_key=True)
-    post_id = db.Column(db.Integer, db.ForeignKey('posts.id', ondelete="CASCADE"), nullable=False, 
+    post_id = db.Column(db.Integer, db.ForeignKey('posts.id', ondelete="CASCADE"), nullable=False,
                         primary_key=True)
     reaction = db.Column(db.Boolean, nullable=True)
 

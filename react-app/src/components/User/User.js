@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteOnePost, getPostsByUserId } from "../../store/post";
 import UserPostForm from "../UserPost";
 import PostReaction from "../PostReaction";
-import Post from "../Post"
-import "./index.css"
+import Post from "../Post";
+import "./user.css";
 
 function User() {
   const [user, setUser] = useState({});
@@ -15,7 +15,6 @@ function User() {
   const history = useHistory();
 
   const userPosts = useSelector((state) => state.postReducer);
-
 
   // Notice we use useParams here instead of getting the params
   // From props.
@@ -50,9 +49,9 @@ function User() {
     return (
       <div>
         <div>
-            <UserPostForm post={post} />
-            <button onClick={() => onDelete(post)}>Delete</button>
-            <button onClick={() => onEdit(post)}>Edit</button>
+          <UserPostForm post={post} />
+          <button onClick={() => onDelete(post)}>Delete</button>
+          <button onClick={() => onEdit(post)}>Edit</button>
         </div>
       </div>
     );

@@ -10,7 +10,7 @@ const likeReaction = (reaction) => ({
 
 const hateReaction = (reaction) => ({
   type: DECREMENT,
-  reaction
+  reaction,
 });
 
 const initialState = {};
@@ -35,7 +35,8 @@ export default function postReactionReducer(state = initialState, action) {
     case DECREMENT: {
       const newState = { ...state };
       const { post_id: postId } = action.reaction.post_reaction;
-      const { count_likes: countLikes, count_hates: countHates } = action.reaction;
+      const { count_likes: countLikes, count_hates: countHates } =
+        action.reaction;
       newState[postId] = {
         reaction: true,
         likes: countLikes,

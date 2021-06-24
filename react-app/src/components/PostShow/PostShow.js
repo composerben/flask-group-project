@@ -4,7 +4,7 @@ import { deleteOnePost, getAllPosts } from "../../store/post";
 import { useDispatch, useSelector } from "react-redux";
 import PostReaction from "../PostReaction";
 import Post from "../Post";
-import "./index.css"
+import "./post-show.css";
 
 function PostShow() {
   const dispatch = useDispatch();
@@ -19,7 +19,7 @@ function PostShow() {
   const postComponents = Object.values(statePosts).map((post) => {
     return (
       <div>
-        <Post key={post.id} post={post} /> 
+        <Post key={post.id} post={post} />
       </div>
     );
   });

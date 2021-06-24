@@ -16,24 +16,24 @@ const getPosts = (posts) => ({
 
 const postPost = (post) => ({
   type: POST_POST,
-  post
-})
+  post,
+});
 
 const deletePost = (post) => ({
   type: DELETE_POST,
-  post
-})
+  post,
+});
 
 const editPost = (post) => ({
   type: EDIT_POST,
-  post
-})
+  post,
+});
 
 export const getAllPosts = () => async (dispatch) => {
   const response = await fetch("/api/posts");
   const data = await response.json();
 
-  console.log("----------------", data)
+  console.log("----------------", data);
   dispatch(getPosts(data.posts));
 };
 
@@ -41,8 +41,8 @@ export const getPostsByUserId = (userId) => async (dispatch) => {
   const res = await fetch(`/api/users/${userId}/posts`);
   const data = await res.json();
 
-  dispatch(getPosts(data.posts))
-}
+  dispatch(getPosts(data.posts));
+};
 
 export const editOnePost = (postId, caption) => async (dispatch) => {
   const res = await fetch(`/api/posts/${postId}`, {
@@ -50,38 +50,38 @@ export const editOnePost = (postId, caption) => async (dispatch) => {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(caption)
+    body: JSON.stringify(caption),
   });
   const data = await res.json();
 
-  dispatch(editPost(data.post))
-}
+  dispatch(editPost(data.post));
+};
 
 export const postOnePost = (data) => async (dispatch) => {
-  const res = await fetch('/api/posts', {
-    method: 'POST',
+  const res = await fetch("/api/posts", {
+    method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(data)
-  })
+    body: JSON.stringify(data),
+  });
 
   if (res.ok) {
-    const post = await res.json()
+    const post = await res.json();
 
-    dispatch(postPost(post))
-    return post
+    dispatch(postPost(post));
+    return post;
   }
-}
+};
 
 export const deleteOnePost = (postId) => async (dispatch) => {
   const res = await fetch(`/api/posts/${postId}`, {
-    method: "DELETE"
-  })
+    method: "DELETE",
+  });
   if (res.ok) {
-    dispatch(deletePost(postId))
+    dispatch(deletePost(postId));
   }
-}
+};
 
 export const likePost = (postId) => async (dispatch) => {
   const response = await fetch(`/api/post_reaction/${postId}/True`, {
@@ -113,7 +113,7 @@ const initialState = {};
 - key into post state and update the like/hate
 */
 
-export default function postReducer(state = initialState, action){
+export default function postReducer(state = initialState, action) {
   switch (action.type) {
     case GET_POST: {
       const allPosts = {};
@@ -123,21 +123,21 @@ export default function postReducer(state = initialState, action){
       return allPosts;
     }
     case POST_POST: {
-      const newState = {...state}
+      const newState = { ...state };
       newState[action.newState] = action.newState;
-      return newState
+      return newState;
     }
     case DELETE_POST: {
-      const newState = {...state}
+      const newState = { ...state };
       delete newState[action.post];
-      return newState
+      return newState;
     }
     case EDIT_POST: {
-      const newState = {...state}
-      const theId = action.post.id
-      const theCaption = action.post.caption
-      newState[theId]["caption"] = theCaption
-      return newState
+      const newState = { ...state };
+      const theId = action.post.id;
+      const theCaption = action.post.caption;
+      newState[theId]["caption"] = theCaption;
+      return newState;
     }
     case UPDATE_REACTION: {
       const newState = { ...state };
@@ -152,4 +152,4 @@ export default function postReducer(state = initialState, action){
     default:
       return state;
   }
-};
+}

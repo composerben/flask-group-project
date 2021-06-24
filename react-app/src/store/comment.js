@@ -1,0 +1,154 @@
+const GET_COMMENT = "comment/SET_COMMENT";
+const DELETE_COMMENT = "comment/DELETE_COMMENT";
+const COMMENT_COMMENT = "comment/COMMENT";
+const EDIT_COMMENT = "comment/EDIT_COMMENT";
+// const UPDATE_REACTION = "reaction/UPDATE_REACTION";
+
+// const updateReaction = (reaction) => ({
+//   type: UPDATE_REACTION,
+//   reaction,
+// });
+
+const getComments = (comments) => ({
+  type: GET_COMMENT,
+  comments,
+});
+
+const commentComment = (comment) => ({
+  type: COMMENT_COMMENT,
+  comment,
+});
+
+const deleteComment = (comment) => ({
+  type: DELETE_COMMENT,
+  comment,
+});
+
+const editComment = (comment) => ({
+  type: EDIT_COMMENT,
+  comment,
+});
+
+export const getAllComments = () => async (dispatch) => {
+  const response = await fetch("/api/comments");
+  const data = await response.json();
+
+  console.log("----------------", data);
+  dispatch(getComments(data.comments));
+};
+
+export const getCommentsByUserId = (userId) => async (dispatch) => {
+  const res = await fetch(`/api/users/${userId}/comments`);
+  const data = await res.json();
+
+  dispatch(getComments(data.comments));
+};
+
+export const editOneComment = (commentId, body) => async (dispatch) => {
+  const res = await fetch(`/api/comments/${commentId}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  });
+  const data = await res.json();
+
+  dispatch(editComment(data.comment));
+};
+
+export const commentOneComment = (data) => async (dispatch) => {
+  const res = await fetch("/api/comments", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+
+  if (res.ok) {
+    const comment = await res.json();
+    // console.log(comment.comment.body);
+    dispatch(commentComment(comment.comment));
+    return comment;
+  }
+};
+
+export const deleteOneComment = (commentId) => async (dispatch) => {
+  const res = await fetch(`/api/comments/${commentId}`, {
+    method: "DELETE",
+  });
+  if (res.ok) {
+    dispatch(deleteComment(commentId));
+  }
+};
+
+// export const likeComment = (commentId) => async (dispatch) => {
+//   const response = await fetch(`/api/comment_reaction/${commentId}/True`, {
+//     method: "COMMENT",
+//   });
+//   if (response.ok) {
+//     const reaction = await response.json();
+
+//     dispatch(updateReaction(reaction));
+//     return reaction;
+//   }
+// };
+
+// export const hateComment = (commentId) => async (dispatch) => {
+//   const response = await fetch(`/api/comment_reaction/${commentId}/False`, {
+//     method: "COMMENT",
+//   });
+//   if (response.ok) {
+//     const reaction = await response.json();
+
+//     dispatch(updateReaction(reaction));
+//     return reaction;
+//   }
+// };
+
+const initialState = {};
+
+export default function commentReducer(state = initialState, action) {
+  switch (action.type) {
+    case GET_COMMENT: {
+      const allComments = {};
+      action.comments.forEach((comment) => {
+        allComments[comment.id] = comment;
+      });
+      return allComments;
+    }
+    case COMMENT_COMMENT: {
+      const newState = { ...state };
+      console.log("\t\tbefore adding comment", newState)
+      // action.state = .body, .id, .post_id, .user_id
+      console.log("\tAction is:", action)
+      newState[action.newState] = action.newState;
+      console.log("\t\tAFTER adding comment", newState)
+      return newState;
+    }
+    case DELETE_COMMENT: {
+      const newState = { ...state };
+      delete newState[action.comment];
+      return newState;
+    }
+    case EDIT_COMMENT: {
+      const newState = { ...state };
+      const theId = action.comment.id;
+      const theCaption = action.comment.body;
+      newState[theId]["body"] = theCaption;
+      return newState;
+    }
+    // case UPDATE_REACTION: {
+    //   const newState = { ...state };
+    //   const { comment_id: commentId } = action.reaction.comment_reaction;
+    //   const { count_likes: countLikes, count_hates: countHates } =
+    //     action.reaction;
+    //   newState[commentId]["likes"] = countLikes;
+    //   newState[commentId]["hates"] = countHates;
+    //   return newState;
+    // }
+    default:
+      return state;
+  }
+}

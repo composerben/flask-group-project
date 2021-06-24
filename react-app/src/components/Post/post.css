@@ -1,0 +1,18 @@
+.individual-post {
+  padding: 10px;
+  margin: 10px;
+  border: 2px solid rgb(254, 251, 251);
+  border-radius: 10px;
+  background-color: rgba(254, 251, 251, 0.68);
+  transition-property: box-shadow;
+  transition-duration: 0.5s;
+}
+
+.individual-post img {
+  width: 450px;
+  border-radius: 5px;
+}
+
+.individual-post:hover {
+  box-shadow: 0 0 10px 5px rgba(34, 34, 34, 0.605);
+}

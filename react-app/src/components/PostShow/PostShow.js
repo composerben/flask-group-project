@@ -26,8 +26,8 @@ function PostShow() {
 
   return (
     <>
-      <h1>Post Show: </h1>
-      <ul>{postComponents}</ul>
+      <h1>check out what our users are up to!</h1>
+      <div className="post-container">{postComponents}</div>
     </>
   );
 }

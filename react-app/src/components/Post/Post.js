@@ -1,6 +1,7 @@
 import React from "react";
 import PostReaction from "../PostReaction";
 import "./post.css";
+import CommentBody from "../CommentBody/CommentBody";
 
 export default function Post({ post }) {
   return (
@@ -8,6 +9,7 @@ export default function Post({ post }) {
       <img src={post.image_src}></img>
       <p>{post.caption}</p>
       <PostReaction postId={post.id} />
+      <CommentBody postId={post.id} />
     </div>
   );
 }

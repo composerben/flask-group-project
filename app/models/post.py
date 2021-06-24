@@ -1,6 +1,6 @@
 from .db import db
 
-
+#add commentReactions Later
 class Post(db.Model):
     __tablename__ = 'posts'
 
@@ -11,6 +11,8 @@ class Post(db.Model):
     # come back to add a GPS location/coords
 
     user = db.relationship("User", back_populates="post")
+    comment = db.relationship("Comment", back_populates="post")
+
     reactions = db.relationship(
         "PostReaction", back_populates="post", passive_deletes=True, cascade="all,delete-orphan")
 

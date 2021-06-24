@@ -11,7 +11,6 @@ import { authenticate } from "./store/session";
 import { useDispatch } from "react-redux";
 
 function App() {
-  // const [authenticated, setAuthenticated] = useState(false);
   const dispatch = useDispatch();
   const [loaded, setLoaded] = useState(false);
 

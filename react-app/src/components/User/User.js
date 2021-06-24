@@ -9,7 +9,6 @@ import "./user.css";
 
 function User() {
   const [user, setUser] = useState({});
-  // const [posts, setPosts] = useState([]);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -49,6 +48,7 @@ function User() {
     return (
       <div>
         <div>
+          <Post post={post} />
           <UserPostForm post={post} />
           <button onClick={() => onDelete(post)}>Delete</button>
           <button onClick={() => onEdit(post)}>Edit</button>
@@ -61,18 +61,6 @@ function User() {
       <h1>Post Show: </h1>
       <ul>{postComponents}</ul>
     </>
-    // <ul>
-    //   <li>
-    //     <strong>User Id</strong> {userId}
-
-    //   </li>
-    //   <li>
-    //     <strong>Username</strong> {user.username}
-    //   </li>
-    //   <li>
-    //     <strong>Email</strong> {user.email}
-    //   </li>
-    // </ul>
   );
 }
 

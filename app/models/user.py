@@ -2,7 +2,7 @@ from .db import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
-
+#add commentReactions Later
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
@@ -24,6 +24,8 @@ class User(db.Model, UserMixin):
 
     post = db.relationship("Post", back_populates="user")
     post_reaction = db.relationship("PostReaction", back_populates="user")
+
+    comment = db.relationship("Comment", back_populates="user")
 
     def to_dict(self):
         return {

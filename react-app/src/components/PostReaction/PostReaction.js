@@ -30,15 +30,19 @@ export default function PostReaction({ postId }) {
   }
 
   return (
-    <>
+    <div className="reactions-container">
       <div>
-        <button onClick={() => onLike()}>Like</button>
+        <button className="like-button" onClick={() => onLike()}>
+          <i class="far fa-thumbs-up"></i>
+          <div className="reaction-counter">{likeCount}</div>
+        </button>
       </div>
-      <div>Likes: {likeCount}</div>
       <div>
-        <button onClick={() => onHate()}>HATE</button>
+        <button className="hate-button" onClick={() => onHate()}>
+          <i class="fas fa-skull-crossbones"></i>
+          <div className="reaction-counter">{hateCount}</div>
+        </button>
       </div>
-      <div>HATES: {hateCount}</div>
-    </>
+    </div>
   );
 }

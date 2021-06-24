@@ -1,0 +1,29 @@
+.reactions-container,
+button {
+  display: flex;
+}
+
+.reactions-container button {
+  margin-right: 10px;
+  padding: 5px;
+  width: 60px;
+  border-radius: 5px;
+}
+
+.hate-button,
+.like-button {
+  transition-property: background-color;
+  transition-duration: 1.5s;
+}
+
+.like-button:hover {
+  background-color: rgb(175, 255, 211);
+}
+
+.hate-button:hover {
+  background-color: rgb(220, 0, 0);
+}
+
+.reaction-counter {
+  margin: auto;
+}

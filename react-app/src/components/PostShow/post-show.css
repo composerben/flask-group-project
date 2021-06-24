@@ -1,0 +1,11 @@
+h1 {
+  align-self: center;
+  font-family: "Viaoda Libre", cursive;
+  text-transform: uppercase;
+}
+
+.post-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}

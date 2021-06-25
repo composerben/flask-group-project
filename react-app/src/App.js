@@ -7,6 +7,7 @@ import ProtectedRoute from "./components/auth/ProtectedRoute";
 import PostShow from "./components/PostShow/PostShow";
 import User from "./components/User/User";
 import PostForm from "./components/PostForm/PostForm";
+import Footer from "./components/Footer";
 import { authenticate } from "./store/session";
 import { useDispatch } from "react-redux";
 
@@ -48,6 +49,7 @@ function App() {
           <h1>My Home Page</h1>
         </ProtectedRoute>
       </Switch>
+      <Footer />
     </BrowserRouter>
   );
 }

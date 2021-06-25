@@ -22,11 +22,11 @@ export default function Post({ post }) {
     await dispatch(deleteOnePost(post.id));
   };
 
-  // const commentComponents = Object.values(post.comment).map((comment) => {
-  //   return (
-
-  //   );
-  // });
+  const commentComponents = Object.values(post.comment).map((comment) => {
+    return (
+      <Comment key={comment.id} comment={comment}/>
+    );
+  });
 
   return (
     <div className="individual-post">
@@ -36,9 +36,9 @@ export default function Post({ post }) {
       <PostReaction postId={post.id} />
       <p>{post.caption}</p>
       <CommentBody postId={post.id} />
-      {/* {commentComponents} */}
+      {commentComponents}
       <div>
-        <Comment key={post.comment.id} comment={post.comment} />
+        {/* <Comment key={post.comment.id} comment={post.comment} /> */}
         {loggedInUser.id == post.user_id && (
           <>
             {edit == true && <UserPostForm post={post} />}

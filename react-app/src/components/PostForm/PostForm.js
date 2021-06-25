@@ -32,29 +32,33 @@ export default function PostForm() {
   }
 
   return (
-    <form onSubmit={submitForm}>
+    <div className="parentPostForm">
       <h1>create new post</h1>
-      <div>
-        <label htmlFor="image_src">Image Source</label>
-        <input
-          value={image}
-          onChange={(e) => newImage(e.target.value)}
-          type="text"
-          placeholder="Enter image source"
-        />
-      </div>
-      <div>
-        <label htmlFor="caption">Enter Caption</label>
-        <input
-          value={caption}
-          onChange={(e) => newCaption(e.target.value)}
-          type="textarea"
-          placeholder="Enter caption here?"
-        />
-      </div>
-      <div>
-        <button className="submit">Submit</button>
-      </div>
-    </form>
+      <form onSubmit={submitForm} className="newPostForm">
+        <div>
+          <label htmlFor="image_src">Image Source: </label>
+          <input
+            value={image}
+            onChange={(e) => newImage(e.target.value)}
+            type="text"
+            placeholder="Enter image source"
+            className="textspot"
+          />
+        </div>
+        <div>
+          <label htmlFor="caption">Enter Caption: </label>
+          <input
+            value={caption}
+            onChange={(e) => newCaption(e.target.value)}
+            type="textarea"
+            placeholder="Enter caption here?"
+            className="textspot"
+          />
+        </div>
+        <div>
+          <button className="submit">Submit</button>
+        </div>
+      </form>
+    </div>
   );
 }

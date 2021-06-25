@@ -25,6 +25,8 @@ class Post(db.Model):
             'likes': len([reaction.reaction for reaction in self.reactions if reaction.reaction is True]),
             'hates': len([reaction.reaction for reaction in self.reactions if reaction.reaction is False]),
         }
+    def get_comments(self):
+        return [comment.to_dict() for comment in self.comment]
 
     def to_dict(self):
         return {
@@ -34,5 +36,6 @@ class Post(db.Model):
             "caption": self.caption,
             "likes": self.get_reactions()["likes"],
             "hates": self.get_reactions()["hates"],
+            "comment": self.get_comments()
             # "get_reactions": self.get_reactions(),
         }

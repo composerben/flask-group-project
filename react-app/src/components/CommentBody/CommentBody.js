@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom";
 import { commentOneComment } from "../../store/comment.js";
 import "./CommentBody.css";
+import { getAllPosts } from "../../store/post.js";
 
 export default function CommentBody({ postId }){
   const [body, setBody] = useState("");

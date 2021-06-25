@@ -5,11 +5,12 @@ import { useDispatch, useSelector } from "react-redux";
 import PostReaction from "../PostReaction";
 import Post from "../Post";
 import "./post-show.css";
+import CommentBody from "../CommentBody/CommentBody";
+import Comment from "../Comment/Comment";
 
 function PostShow() {
   const dispatch = useDispatch();
   const history = useHistory();
-  const [posts, setPosts] = useState([]);
   const statePosts = useSelector((state) => state.postReducer);
 
   useEffect(() => {
@@ -23,6 +24,7 @@ function PostShow() {
       </div>
     );
   });
+
 
   return (
     <>

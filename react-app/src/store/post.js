@@ -164,6 +164,7 @@ export default function postReducer(state = initialState, action) {
       // console.log('\n\n\n', newState[action.comment.post_id]);
       return newState;
     }
+
     default:
       return state;
   }

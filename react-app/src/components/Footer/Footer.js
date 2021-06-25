@@ -18,7 +18,7 @@ export default function Footer() {
             </g>
           </svg>
         </a>
-        <a href="linkedin.com/in/ben-ash-347b2b1b6">
+        <a href="https://linkedin.com/in/ben-ash-347b2b1b6">
           <svg className={style.linkedIn} viewBox="0 0 128 128">
             <path
               fill="#c9c9c9"
@@ -45,7 +45,7 @@ export default function Footer() {
             </g>
           </svg>
         </a>
-        <a href="linkedin.com/in/ananya-hans-bb757020b">
+        <a href="https://linkedin.com/in/ananya-hans-bb757020b">
           <svg className={style.linkedIn} viewBox="0 0 128 128">
             <path
               fill="#c9c9c9"
@@ -72,7 +72,7 @@ export default function Footer() {
             </g>
           </svg>
         </a>
-        <a href="linkedin.com/in/nathan-mount-458bba133">
+        <a href="https://linkedin.com/in/nathan-mount-458bba133">
           <svg className={style.linkedIn} viewBox="0 0 128 128">
             <path
               fill="#c9c9c9"

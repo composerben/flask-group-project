@@ -5,7 +5,7 @@ import { commentOneComment } from "../../store/comment.js";
 import "./CommentBody.css";
 import { getAllPosts } from "../../store/post.js";
 
-export default function CommentBody({ postId }){
+export default function CommentBody({ postId }) {
   const [body, setBody] = useState("");
   const userId = useSelector((state) => state.session.user.id);
   const dispatch = useDispatch();
@@ -22,13 +22,12 @@ export default function CommentBody({ postId }){
 
   return (
     <div>
-      <input
+      <textarea
         value={body}
-        type="textarea"
         onChange={(e) => setBody(e.target.value)}
         placeholder="Tell strangers on the internet your useless thoughts"
       />
       <button onClick={commentComment}>Submit Opinion</button>
     </div>
   );
-};
+}

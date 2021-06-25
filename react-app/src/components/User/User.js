@@ -8,7 +8,7 @@ import "./user.css";
 
 function User() {
   const [user, setUser] = useState({});
-  const [edit, setEdit] = useState(false);
+  // const [edit, setEdit] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -40,16 +40,16 @@ function User() {
     await dispatch(deleteOnePost(post.id));
   };
 
-  const onEdit = () => {
-    setEdit((prevState) => !prevState);
-  };
+  // const onEdit = () => {
+  //   setEdit((prevState) => !prevState);
+  // };
 
   const postComponents = Object.values(userPosts).map((post) => {
     return (
       <div>
         <div>
           <Post post={post} />
-          {loggedInUser.id == userId && (
+          {/* {loggedInUser.id == userId && (
             <>
               {edit == true && <UserPostForm post={post} />}
               <div className="crud-buttons">
@@ -59,7 +59,7 @@ function User() {
                 <button onClick={() => onDelete(post)}>Delete Post</button>
               </div>
             </>
-          )}
+          )} */}
         </div>
       </div>
     );

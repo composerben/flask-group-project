@@ -2,7 +2,6 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    justify-content: center;
     padding: 25px;
 }
 
@@ -10,8 +9,6 @@
     border: solid black;    
     padding: 20px;
     border-radius: 15px;
-
-
 }
 
 .formFill{

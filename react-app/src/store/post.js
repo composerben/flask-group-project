@@ -1,8 +1,12 @@
+import { COMMENT_COMMENT } from "./comment";
+
+
 const GET_POST = "post/SET_POST";
 const DELETE_POST = "post/DELETE_POST";
 const POST_POST = "post/POST";
 const EDIT_POST = "post/EDIT_POST";
 const UPDATE_REACTION = "reaction/UPDATE_REACTION";
+
 
 const updateReaction = (reaction) => ({
   type: UPDATE_REACTION,
@@ -28,6 +32,7 @@ const editPost = (post) => ({
   type: EDIT_POST,
   post,
 });
+
 
 export const getAllPosts = () => async (dispatch) => {
   const response = await fetch("/api/posts");
@@ -107,6 +112,7 @@ export const hatePost = (postId) => async (dispatch) => {
   }
 };
 
+
 const initialState = {};
 /*
 - use the to_dict method to grab likes/hates from post model
@@ -147,6 +153,15 @@ export default function postReducer(state = initialState, action) {
       newState[postId]["likes"] = countLikes;
       newState[postId]["hates"] = countHates;
       // newState[postId]["reaction"] = true;
+      return newState;
+    }
+    case COMMENT_COMMENT: {
+      const newState = {...state, [action.comment.post_id]:{...state[action.comment.post_id]}};
+      const newComments = [...newState[action.comment.post_id].comment, action.comment];
+      newState[action.comment.post_id].comment = newComments;
+      // console.log('newcomments----', newComments)
+      // console.log(action.comment.post_id);
+      // console.log('\n\n\n', newState[action.comment.post_id]);
       return newState;
     }
     default:

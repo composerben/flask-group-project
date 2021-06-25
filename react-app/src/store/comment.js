@@ -1,6 +1,6 @@
 const GET_COMMENT = "comment/SET_COMMENT";
 const DELETE_COMMENT = "comment/DELETE_COMMENT";
-const COMMENT_COMMENT = "comment/COMMENT";
+export const COMMENT_COMMENT = "comment/COMMENT";
 const EDIT_COMMENT = "comment/EDIT_COMMENT";
 // const UPDATE_REACTION = "reaction/UPDATE_REACTION";
 

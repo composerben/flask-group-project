@@ -1,0 +1,8 @@
+.crud-buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.crud-buttons button {
+  margin: 5px;
+}

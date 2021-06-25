@@ -58,7 +58,7 @@ function User() {
   });
   return (
     <>
-      <h1>Post Show: </h1>
+      <h1>{user.username}'s Posts</h1>
       <ul>{postComponents}</ul>
     </>
   );

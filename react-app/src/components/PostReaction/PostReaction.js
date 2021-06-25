@@ -20,12 +20,8 @@ export default function PostReaction({ postId }) {
 
   async function onHate() {
     await dispatch(hatePost(postId));
-    console.log("HATES: ", hateCount);
-    console.log("LIKES: ", likeCount);
     if (hateCount > likeCount) {
-      console.log("BEFORE DISPATCH DELETE");
       await dispatch(deleteOnePost(postId));
-      console.log("AFTER DISPATCH DELETE");
     }
   }
 

@@ -1,6 +1,7 @@
 /* TODO Add site wide styles */
 body {
   background-color: rgb(228, 227, 227);
+  margin: 0;
 }
 
 h1 {

@@ -33,8 +33,9 @@ const LoginForm = () => {
 
   return (
     <div className="parentForm">
+      <h1> Login </h1>
       <form onSubmit={onLogin} className="formItself">
-        <div className="errors">
+        <div className="errorsStuff">
           {errors.map((error) => (
             <div>{error}</div>
           ))}
@@ -59,7 +60,7 @@ const LoginForm = () => {
               value={password}
               onChange={updatePassword}
             />
-            <button type="submit">Login</button>
+            <button className="loginBtn" type="submit">Login</button>
           </div>
         </div>
       </form>

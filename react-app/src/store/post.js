@@ -38,7 +38,6 @@ export const getAllPosts = () => async (dispatch) => {
   const response = await fetch("/api/posts");
   const data = await response.json();
 
-  console.log("----------------", data);
   dispatch(getPosts(data.posts));
 };
 
@@ -159,9 +158,6 @@ export default function postReducer(state = initialState, action) {
       const newState = {...state, [action.comment.post_id]:{...state[action.comment.post_id]}};
       const newComments = [...newState[action.comment.post_id].comment, action.comment];
       newState[action.comment.post_id].comment = newComments;
-      // console.log('newcomments----', newComments)
-      // console.log(action.comment.post_id);
-      // console.log('\n\n\n', newState[action.comment.post_id]);
       return newState;
     }
 

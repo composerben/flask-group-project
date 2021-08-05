@@ -15,7 +15,7 @@ def users():
 @user_routes.route('/<int:id>')
 @login_required
 def user(id):
-    user = User.query.get(id)
+    user = User.query.get_or_404(id)
     return user.to_dict()
 
 

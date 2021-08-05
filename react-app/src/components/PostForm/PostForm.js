@@ -27,7 +27,7 @@ export default function PostForm() {
       history.push("/posts");
     } catch (e) {
       let error = new Error(e);
-      console.log(error);
+      console.error(error);
     }
   }
 

@@ -33,7 +33,6 @@ export const getAllComments = () => async (dispatch) => {
   const response = await fetch("/api/comments");
   const data = await response.json();
 
-  console.log("----------------", data);
   dispatch(getComments(data.comments));
 };
 
@@ -68,7 +67,6 @@ export const commentOneComment = (data) => async (dispatch) => {
 
   if (res.ok) {
     const comment = await res.json();
-    // console.log(comment.comment.body);
     dispatch(commentComment(comment.comment));
     return comment;
   }
@@ -120,11 +118,7 @@ export default function commentReducer(state = initialState, action) {
     }
     case COMMENT_COMMENT: {
       const newState = { ...state };
-      console.log("\t\tbefore adding comment", newState)
-      // action.state = .body, .id, .post_id, .user_id
-      console.log("\tAction is:", action)
       newState[action.newState] = action.newState;
-      console.log("\t\tAFTER adding comment", newState)
       return newState;
     }
     case DELETE_COMMENT: {

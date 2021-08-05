@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../store/session";
+import DemoUser from "./DemoUser";
 import "./loginForm.css"
 
 const LoginForm = () => {
@@ -61,6 +62,7 @@ const LoginForm = () => {
               onChange={updatePassword}
             />
             <button className="loginBtn" type="submit">Login</button>
+            <DemoUser />
           </div>
         </div>
       </form>

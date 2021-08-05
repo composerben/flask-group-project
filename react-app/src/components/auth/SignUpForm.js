@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { signUp } from "../../store/session";
+import DemoUser from "./DemoUser";
 import "./signUpForm.css"
 
 const SignUpForm = () => {
@@ -81,6 +82,7 @@ const SignUpForm = () => {
           ></input>
         </div>
         <button className="YESYES" type="submit">Sign Up</button>
+        <DemoUser />
       </form>
     </div>
   );

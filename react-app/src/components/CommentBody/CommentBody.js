@@ -16,7 +16,6 @@ export default function CommentBody({ postId }) {
       dispatch(commentOneComment({ postId, body }));
     } catch (e) {
       let error = new Error(e);
-      console.log("\tComment failed:", error);
     }
   };
 

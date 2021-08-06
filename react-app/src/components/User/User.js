@@ -8,7 +8,7 @@ import "./user.css";
 
 function User() {
   const dispatch = useDispatch();
-  const [user, setUser] = useState(false);
+  const [user, setUser] = useState(true);
   const userPosts = useSelector((state) => state.postReducer);
   const { userId } = useParams();
 
@@ -19,6 +19,8 @@ function User() {
         const user = await response.json();
         setUser(user);
         await dispatch(getPostsByUserId(userId));
+      } else {
+        setUser(false);
       }
     })();
   }, [userId, dispatch]);
@@ -30,7 +32,7 @@ function User() {
   const postComponents = Object.values(userPosts).map((post) => {
     return <Post post={post} />;
   });
-  
+
   return (
     <>
       <h1>{user.username}'s Posts</h1>

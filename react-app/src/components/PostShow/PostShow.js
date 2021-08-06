@@ -14,10 +14,12 @@ function PostShow() {
   }, [dispatch]);
 
   const postComponents = Object.values(statePosts).map((post) => {
-    return (
+    return post ? (
       <div>
-        <Post key={post.id} post={post} />
+        <Post key={post?.id} post={post} />
       </div>
+    ) : (
+      <div>Loading...</div>
     );
   });
 

@@ -14,6 +14,7 @@ export default function CommentBody({ postId }) {
     e.preventDefault();
     try {
       dispatch(commentOneComment({ postId, body }));
+      setBody("");
     } catch (e) {
       let error = new Error(e);
     }

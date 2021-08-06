@@ -2,6 +2,8 @@ from flask import Blueprint, request, session
 from flask_login import login_required, current_user
 from app.models import db, Post
 from app.forms import PostForm
+from app.aws_helpers import (
+    upload_file_to_s3, allowed_file, get_unique_filename)
 
 post_routes = Blueprint("posts", __name__)
 
@@ -18,18 +20,36 @@ def posts():
 @post_routes.route("", methods=["POST"])
 @login_required
 def post_posts():
+    if "image" not in request.files:
+        return {"errors": "image required"}, 400
+    
+    image = request.files["image"]
+
+    if not allowed_file(image.filename):
+        return {"errors": "file type not permitted"}, 400
+
+    image.filename = get_unique_filename(image.filename)
+
+    upload = upload_file_to_s3(image)
+
+    if "url" not in upload:
+        # if no URL, error when uploading
+        return upload, 400
+    
+    url = upload["url"]
+
     form = PostForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         post = Post(
             user_id=current_user.id,
-            image_src=form.data['image_src'],
+            image_src=url,
             caption=form.data['caption'],
         )
         db.session.add(post)
         db.session.commit()
-    if not form.errors:
-        return "no errors"
+        return post.to_dict()
+
     return {"errors": form.errors}
 
 

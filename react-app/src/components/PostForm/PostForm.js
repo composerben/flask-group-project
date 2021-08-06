@@ -5,24 +5,26 @@ import { postOnePost } from "../../store/post.js";
 import "./post-form.css";
 
 export default function PostForm() {
-  const [image, newImage] = useState("");
+  const [image, setImage] = useState(null);
+  const [imageLoading, setImageLoading] = useState(false);
   const [caption, newCaption] = useState("");
   const [errors, setErrors] = useState("");
   const userId = useSelector((state) => state.session.user.id);
   const dispatch = useDispatch();
   const history = useHistory();
 
-  function submitForm(e) {
+  async function submitForm(e) {
     e.preventDefault();
-
+    const formData = new FormData();
     //TODO: MAKE ERRORS, BUT IT WORKS
     try {
-      dispatch(
-        postOnePost({
-          image_src: image,
-          userId,
-          caption,
-        })
+      formData.append("image", image);
+      formData.append("caption", caption);
+      formData.append("user_id", userId);
+      setImageLoading(true);
+
+      await dispatch(
+        postOnePost(formData)
       );
       history.push("/posts");
     } catch (e) {
@@ -31,17 +33,22 @@ export default function PostForm() {
     }
   }
 
+  const updateImage = e => {
+    const file = e.target.files[0];
+    setImage(file);
+  }
+
   return (
     <div className="parentPostForm">
       <h1>create new post</h1>
       <form onSubmit={submitForm} className="newPostForm">
         <div>
-          <label htmlFor="image_src">Image Source: </label>
+          <label htmlFor="image">Image: </label>
           <input
-            value={image}
-            onChange={(e) => newImage(e.target.value)}
-            type="text"
-            placeholder="Enter image source"
+            onChange={updateImage}
+            type="file"
+            accept="image/*"
+            placeholder="Upload image"
             className="textspot"
           />
         </div>
@@ -57,6 +64,7 @@ export default function PostForm() {
         </div>
         <div>
           <button className="submit">Submit</button>
+          {imageLoading && <p>Loading...</p>}
         </div>
       </form>
     </div>

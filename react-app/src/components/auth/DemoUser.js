@@ -5,9 +5,9 @@ import { login } from "../../store/session";
 export default function DemoUser() {
     const dispatch = useDispatch();
 
-    const demoLogin = async (e) => {
+    const demoLogin = (e) => {
         e.preventDefault();
-        const data = await dispatch(login("demo@aa.io", "password"));
+        dispatch(login("demo@aa.io", "password"));
     }
     return <button onClick={demoLogin}>Demo User</button>
 }

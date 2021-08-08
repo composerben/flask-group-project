@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useEffect } from "react";
 import { getAllPosts } from "../../store/post";
 import { useDispatch, useSelector } from "react-redux";
 import Post from "../Post";
@@ -7,7 +6,7 @@ import "./post-show.css";
 
 function PostShow() {
   const dispatch = useDispatch();
-  const statePosts = useSelector((state) => state.postReducer);
+  const statePosts = useSelector((state) => state.posts.byId);
 
   useEffect(() => {
     dispatch(getAllPosts());
@@ -15,7 +14,7 @@ function PostShow() {
 
   const postComponents = Object.values(statePosts).map((post) => {
     return post ? (
-      <div>
+      <div key={post?.id}>
         <Post key={post?.id} post={post} />
       </div>
     ) : (

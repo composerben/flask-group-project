@@ -1,12 +1,10 @@
 import { COMMENT_COMMENT } from "./comment";
 
-
 const GET_POST = "post/SET_POST";
 const DELETE_POST = "post/DELETE_POST";
 const POST_POST = "post/POST";
 const EDIT_POST = "post/EDIT_POST";
 const UPDATE_REACTION = "reaction/UPDATE_REACTION";
-
 
 const updateReaction = (reaction) => ({
   type: UPDATE_REACTION,
@@ -32,7 +30,6 @@ const editPost = (post) => ({
   type: EDIT_POST,
   post,
 });
-
 
 export const getAllPosts = () => async (dispatch) => {
   const response = await fetch("/api/posts");
@@ -108,37 +105,42 @@ export const hatePost = (postId) => async (dispatch) => {
   }
 };
 
-
-const initialState = {};
+const initialState = {
+  byId: {},
+  allIds: [],
+};
 /*
 - use the to_dict method to grab likes/hates from post model
 - key into post state and update the like/hate
 */
 
-export default function postReducer(state = initialState, action) {
+export default function posts(state = initialState, action) {
   switch (action.type) {
     case GET_POST: {
-      const allPosts = {};
+      const newState = { ...state };
       action.posts.forEach((post) => {
-        allPosts[post.id] = post;
+        newState.byId[post.id] = post;
+        newState.allIds.push(post.id);
       });
-      return allPosts;
+      return newState;
     }
     case POST_POST: {
       const newState = { ...state };
-      newState[action.newState] = action.newState;
+      newState.byId[action.post.id] = action.post;
+      newState.allIds.push(action.post.id);
       return newState;
     }
     case DELETE_POST: {
       const newState = { ...state };
-      delete newState[action.post];
+      delete newState.byId[action.post.id];
+      newState.allIds = newState.allIds.filter(
+        (post) => post.id !== action.post.id
+      );
       return newState;
     }
     case EDIT_POST: {
       const newState = { ...state };
-      const theId = action.post.id;
-      const theCaption = action.post.caption;
-      newState[theId]["caption"] = theCaption;
+      newState.byId[action.post.id].caption = action.post.caption;
       return newState;
     }
     case UPDATE_REACTION: {
@@ -146,16 +148,22 @@ export default function postReducer(state = initialState, action) {
       const { post_id: postId } = action.reaction.post_reaction;
       const { count_likes: countLikes, count_hates: countHates } =
         action.reaction;
-      newState[postId]["likes"] = countLikes;
-      newState[postId]["hates"] = countHates;
-      // newState[postId]["reaction"] = true;
+      newState.byId[postId]["likes"] = countLikes;
+      newState.byId[postId]["hates"] = countHates;
       return newState;
     }
     case COMMENT_COMMENT: {
-      const newState = {...state, [action.comment.post_id]:{...state[action.comment.post_id]}};
-      const newComments = [...newState[action.comment.post_id].comment, action.comment];
-      newState[action.comment.post_id].comment = newComments;
+      const newState = {...state, ["byId"]:{...state.byId}, ["byId"[action.comment.post_id]]:{...state.byId[action.comment.post_id]}};
+      newState.byId[action.comment.post_id] = {...state.byId[action.comment.post_id]};
+      const newComments = [...newState.byId[action.comment.post_id].comment, action.comment];
+      newState.byId[action.comment.post_id].comment = newComments;
       return newState;
+
+      // THANK YOU JULIET
+      // const newState = {...state, [action.comment.post_id]:{...state[action.comment.post_id]}};
+      // const newComments = [...newState[action.comment.post_id].comment, action.comment];
+      // newState[action.comment.post_id].comment = newComments;
+      // return newState;
     }
 
     default:

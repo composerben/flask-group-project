@@ -9,7 +9,7 @@ import "./user.css";
 function User() {
   const dispatch = useDispatch();
   const [user, setUser] = useState(true);
-  const userPosts = useSelector((state) => state.postReducer);
+  const userPosts = useSelector((state) => state.posts);
   const { userId } = useParams();
 
   useEffect(() => {

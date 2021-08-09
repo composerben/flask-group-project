@@ -1,6 +1,6 @@
 import { COMMENT_COMMENT } from "./comment";
 
-const GET_POST = "post/SET_POST";
+export const GET_POST = "post/SET_POST";
 const DELETE_POST = "post/DELETE_POST";
 const POST_POST = "post/POST";
 const EDIT_POST = "post/EDIT_POST";
@@ -153,7 +153,7 @@ export default function posts(state = initialState, action) {
       return newState;
     }
     case COMMENT_COMMENT: {
-      const newState = {...state, ["byId"]:{...state.byId}, ["byId"[action.comment.post_id]]:{...state.byId[action.comment.post_id]}};
+      const newState = {...state, ["byId"[action.comment.post_id]]:{...state.byId[action.comment.post_id]}};
       newState.byId[action.comment.post_id] = {...state.byId[action.comment.post_id]};
       const newComments = [...newState.byId[action.comment.post_id].comment, action.comment];
       newState.byId[action.comment.post_id].comment = newComments;

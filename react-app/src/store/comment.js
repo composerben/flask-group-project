@@ -1,3 +1,5 @@
+import GET_POST from "./post";
+
 const GET_COMMENT = "comment/SET_COMMENT";
 const DELETE_COMMENT = "comment/DELETE_COMMENT";
 export const COMMENT_COMMENT = "comment/COMMENT";
@@ -105,16 +107,32 @@ export const deleteOneComment = (commentId) => async (dispatch) => {
 //   }
 // };
 
-const initialState = {};
+const initialState = { byId: {}, allIds: [] };
 
 export default function commentReducer(state = initialState, action) {
   switch (action.type) {
-    case GET_COMMENT: {
-      const allComments = {};
-      action.comments.forEach((comment) => {
-        allComments[comment.id] = comment;
+    case GET_POST: {
+      const newState = { ...state };
+      action.posts.forEach((post) => {
+        const comments = post.comment;
+        comments.forEach((comment) => {
+          if (newState.byId[comment.id] === undefined) {
+            newState.byId[comment.id] = comment;
+            newState.allIds.push(comment.id);
+          }
+        });
       });
-      return allComments;
+      return newState;
+    }
+    case GET_COMMENT: {
+      const newState = { ...state };
+      action.comments.forEach((comment) => {
+        if (state.byId[comment] === undefined) {
+          newState.byId[comment.id] = comment;
+          newState.allIds.push(comment.id);
+        }
+      });
+      return newState;
     }
     case COMMENT_COMMENT: {
       const newState = { ...state };

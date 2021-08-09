@@ -10,7 +10,7 @@ import "./user.css";
 function User() {
   const { userId } = useParams();
   const dispatch = useDispatch();
-  const userPosts = useSelector((state) => state.posts.byId);
+  const userPosts = useSelector((state) => state.posts?.byId);
   const user = useSelector((state) => state.users.byId[userId]);
 
   useEffect(() => {
@@ -18,22 +18,20 @@ function User() {
     dispatch(fetchUser(userId));
   }, [dispatch, userId]);
 
-  useEffect(() => {
-    console.log("Here's in use effect:", Object.values(userPosts));
-  }, [userPosts])
-
-  console.log("Here's the posts:", userPosts);
-  console.log("Here's after manipulation:", Object.values(userPosts));
-
+  // useEffect(() => {
+  // }, [userPosts])
+  console.log("Here's the user posts:", userPosts)
+  console.log("Here's the keys in use effect:", Object.keys(userPosts));
+  console.log("Here's the values in use effect:", Object.values(userPosts));
+  console.log("Here's the entries in use effect:", Object.entries(userPosts));
+  
   if (!user) {
     return <Page404 />;
   }
 
-  const postComponents = Object.values(userPosts).map((post) => {
+  const postComponents = Object.values(userPosts)?.map((post) => {
     return <Post post={post} />;
   });
-
-  console.log("Here's the post components:", postComponents);
 
   return (
     <>

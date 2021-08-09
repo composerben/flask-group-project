@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useEffect } from "react";
 import { getAllPosts } from "../../store/post";
 import { useDispatch, useSelector } from "react-redux";
 import Post from "../Post";

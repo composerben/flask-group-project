@@ -76,8 +76,9 @@ export const deleteOneComment = (commentId) => async (dispatch) => {
   const res = await fetch(`/api/comments/${commentId}`, {
     method: "DELETE",
   });
+  const data = await res.json();
   if (res.ok) {
-    dispatch(deleteComment(commentId));
+    dispatch(deleteComment(data));
   }
 };
 

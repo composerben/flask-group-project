@@ -17,8 +17,8 @@ export default function Comment({ comment }) {
 
   return (
     <div className={styles.comment}>
-      <p>Posted by: {commentAuthor?.username}</p>
-      <p>{comment.body}</p>
+      <p className={styles.comment__header}>Posted by: {commentAuthor?.username}</p>
+      <p className={styles.comment__body}>{comment.body}</p>
       {authorId === user.id && (
         <div className={styles.buttons}>
           <button>Edit</button>

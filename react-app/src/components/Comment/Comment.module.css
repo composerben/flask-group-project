@@ -1,0 +1,16 @@
+.buttons {
+  display: flex;
+}
+
+.comment {
+  border: 2px solid red;
+}
+
+.comment__header {
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+.comment__body {
+    margin: 0;
+}

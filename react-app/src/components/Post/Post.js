@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import PostReaction from "../PostReaction";
-import { deleteOnePost, getPostsByUserId } from "../../store/post";
+import { deleteOnePost } from "../../store/post";
 import "./post.css";
 import CommentBody from "../CommentBody/CommentBody";
 import Comment from "../Comment/Comment";
@@ -31,7 +31,7 @@ export default function Post({ post }) {
   return (
     <div className="individual-post">
       <Link to={`/users/${post.user_id}`}>
-        <img src={post.image_src}></img>
+        <img src={post.image_src} alt="post by user"></img>
       </Link>
       <PostReaction postId={post.id} />
       <p>{post.caption}</p>
@@ -39,12 +39,12 @@ export default function Post({ post }) {
       {commentComponents}
       <div>
         {/* <Comment key={post.comment.id} comment={post.comment} /> */}
-        {loggedInUser.id == post.user_id && (
+        {loggedInUser.id === post.user_id && (
           <>
-            {edit == true && <UserPostForm post={post} />}
+            {edit === true && <UserPostForm post={post} />}
             <div className="crud-buttons">
               <button onClick={() => onEdit(post)}>
-                {edit == true ? "Done Editing?" : "Edit Post"}
+                {edit === true ? "Done Editing?" : "Edit Post"}
               </button>
               <button onClick={() => onDelete(post)}>Delete Post</button>
             </div>

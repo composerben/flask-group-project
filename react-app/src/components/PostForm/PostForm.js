@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { postOnePost } from "../../store/post.js";
 import "./post-form.css";
 
@@ -8,7 +8,6 @@ export default function PostForm() {
   const [image, setImage] = useState(null);
   const [imageLoading, setImageLoading] = useState(false);
   const [caption, newCaption] = useState("");
-  const [errors, setErrors] = useState("");
   const userId = useSelector((state) => state.session.user.id);
   const dispatch = useDispatch();
   const history = useHistory();

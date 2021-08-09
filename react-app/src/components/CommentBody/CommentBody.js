@@ -1,13 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useHistory } from "react-router-dom";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { commentOneComment } from "../../store/comment.js";
 import "./CommentBody.css";
-import { getAllPosts } from "../../store/post.js";
 
 export default function CommentBody({ postId }) {
   const [body, setBody] = useState("");
-  const userId = useSelector((state) => state.session.user.id);
   const dispatch = useDispatch();
 
   const commentComment = (e) => {
@@ -17,6 +14,7 @@ export default function CommentBody({ postId }) {
       setBody("");
     } catch (e) {
       let error = new Error(e);
+      console.error(error)
     }
   };
 

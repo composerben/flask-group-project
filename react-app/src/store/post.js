@@ -1,4 +1,4 @@
-import { COMMENT_COMMENT } from "./comment";
+import { COMMENT_COMMENT, DELETE_COMMENT } from "./comment";
 
 
 const GET_POST = "post/SET_POST";
@@ -157,7 +157,12 @@ export default function postReducer(state = initialState, action) {
       newState[action.comment.post_id].comment = newComments;
       return newState;
     }
-
+    case DELETE_COMMENT: {
+      const newState = { ...state };
+      const newComments = state[action.comment.post_id].comment.filter(comment => comment.id !== action.comment.id)
+      newState[action.comment.post_id].comment = newComments;
+      return newState;
+    }
     default:
       return state;
   }

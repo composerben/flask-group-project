@@ -158,12 +158,6 @@ export default function posts(state = initialState, action) {
       const newComments = [...newState.byId[action.comment.post_id].comment, action.comment];
       newState.byId[action.comment.post_id].comment = newComments;
       return newState;
-
-      // THANK YOU JULIET
-      // const newState = {...state, [action.comment.post_id]:{...state[action.comment.post_id]}};
-      // const newComments = [...newState[action.comment.post_id].comment, action.comment];
-      // newState[action.comment.post_id].comment = newComments;
-      // return newState;
     }
 
     default:

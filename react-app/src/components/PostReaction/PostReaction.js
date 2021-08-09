@@ -8,8 +8,8 @@ export default function PostReaction({ postId }) {
   //   const [reaction, setReaction] = useState(null);
   const dispatch = useDispatch();
 
-  const likeCount = useSelector((state) => state.posts.byId[postId].likes);
-  const hateCount = useSelector((state) => state.posts.byId[postId].hates);
+  const likeCount = useSelector((state) => state.posts?.byId[postId]?.likes);
+  const hateCount = useSelector((state) => state.posts?.byId[postId]?.hates);
 
   function onLike() {
     dispatch(likePost(postId));

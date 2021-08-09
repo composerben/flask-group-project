@@ -1,5 +1,25 @@
 import { SET_USER } from "./session";
 
+
+// action creators
+const getUser = data => ({
+  type: SET_USER,
+  payload: data,
+})
+
+// thunks
+export const fetchUser = userId => async (dispatch) => {
+  try {
+    const res = await fetch(`/api/users/${userId}`);
+    if (res.ok) {
+      const user = await res.json();
+      dispatch(getUser(user));
+    }
+  } catch (e) {
+    return e;
+  }
+}
+
 const initialState = {
   byId: {},
   allIds: [],

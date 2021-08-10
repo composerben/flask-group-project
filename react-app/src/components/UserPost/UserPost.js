@@ -4,7 +4,7 @@ import { editOnePost } from "../../store/post";
 import "./user-post.css";
 
 export default function UserPostForm({ post }) {
-  const [caption, setCaption] = useState("");
+  const [caption, setCaption] = useState(post.caption);
   const dispatch = useDispatch();
 
   const onEdit = async (e) => {

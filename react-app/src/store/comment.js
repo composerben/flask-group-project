@@ -1,7 +1,7 @@
 const GET_COMMENT = "comment/SET_COMMENT";
 export const DELETE_COMMENT = "comment/DELETE_COMMENT";
 export const COMMENT_COMMENT = "comment/COMMENT";
-const EDIT_COMMENT = "comment/EDIT_COMMENT";
+export const EDIT_COMMENT = "comment/EDIT_COMMENT";
 // const UPDATE_REACTION = "reaction/UPDATE_REACTION";
 
 // const updateReaction = (reaction) => ({
@@ -110,30 +110,30 @@ const initialState = {};
 
 export default function commentReducer(state = initialState, action) {
   switch (action.type) {
-    case GET_COMMENT: {
-      const allComments = {};
-      action.comments.forEach((comment) => {
-        allComments[comment.id] = comment;
-      });
-      return allComments;
-    }
-    case COMMENT_COMMENT: {
-      const newState = { ...state };
-      newState[action.newState] = action.newState;
-      return newState;
-    }
-    case DELETE_COMMENT: {
-      const newState = { ...state };
-      delete newState[action.comment];
-      return newState;
-    }
-    case EDIT_COMMENT: {
-      const newState = { ...state };
-      const theId = action.comment.id;
-      const theCaption = action.comment.body;
-      newState[theId]["body"] = theCaption;
-      return newState;
-    }
+    // case GET_COMMENT: {
+    //   const allComments = {};
+    //   action.comments.forEach((comment) => {
+    //     allComments[comment.id] = comment;
+    //   });
+    //   return allComments;
+    // }
+    // case COMMENT_COMMENT: {
+    //   const newState = { ...state };
+    //   newState[action.newState] = action.newState;
+    //   return newState;
+    // }
+    // case DELETE_COMMENT: {
+    //   const newState = { ...state };
+    //   delete newState[action.comment];
+    //   return newState;
+    // }
+    // case EDIT_COMMENT: {
+    //   const newState = { ...state };
+    //   const theId = action.comment.id;
+    //   const theCaption = action.comment.body;
+    //   newState[theId]["body"] = theCaption;
+    //   return newState;
+    // }
     // case UPDATE_REACTION: {
     //   const newState = { ...state };
     //   const { comment_id: commentId } = action.reaction.comment_reaction;

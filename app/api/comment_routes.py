@@ -31,7 +31,7 @@ def edit_comment(id):
     print("Made it into the edit_comment route")
     comment = Comment.query.get(id)
     request_body = request.get_json()
-    comment.caption = request_body
+    comment.body = request_body
     db.session.commit()
     return {'comment': comment.to_dict()}
 

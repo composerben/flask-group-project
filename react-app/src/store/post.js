@@ -1,12 +1,10 @@
-import { COMMENT_COMMENT } from "./comment";
-
+import { COMMENT_COMMENT, DELETE_COMMENT, EDIT_COMMENT } from "./comment";
 
 const GET_POST = "post/SET_POST";
 const DELETE_POST = "post/DELETE_POST";
 const POST_POST = "post/POST";
 const EDIT_POST = "post/EDIT_POST";
 const UPDATE_REACTION = "reaction/UPDATE_REACTION";
-
 
 const updateReaction = (reaction) => ({
   type: UPDATE_REACTION,
@@ -32,7 +30,6 @@ const editPost = (post) => ({
   type: EDIT_POST,
   post,
 });
-
 
 export const getAllPosts = () => async (dispatch) => {
   const response = await fetch("/api/posts");
@@ -108,7 +105,6 @@ export const hatePost = (postId) => async (dispatch) => {
   }
 };
 
-
 const initialState = {};
 /*
 - use the to_dict method to grab likes/hates from post model
@@ -152,12 +148,37 @@ export default function postReducer(state = initialState, action) {
       return newState;
     }
     case COMMENT_COMMENT: {
-      const newState = {...state, [action.comment.post_id]:{...state[action.comment.post_id]}};
-      const newComments = [...newState[action.comment.post_id].comment, action.comment];
+      const newState = {
+        ...state,
+        [action.comment.post_id]: { ...state[action.comment.post_id] },
+      };
+      const newComments = [
+        ...newState[action.comment.post_id].comment,
+        action.comment,
+      ];
       newState[action.comment.post_id].comment = newComments;
       return newState;
     }
-
+    case DELETE_COMMENT: {
+      const newState = { ...state };
+      const newComments = state[action.comment.post_id].comment.filter(
+        (comment) => comment.id !== action.comment.id
+      );
+      newState[action.comment.post_id].comment = newComments;
+      return newState;
+    }
+    case EDIT_COMMENT: {
+      const newState = { ...state };
+      const commentToEdit = state[action.comment.post_id].comment.find(
+        (comment) => comment.id === action.comment.id
+      );
+      const commentPosition =
+        state[action.comment.post_id].comment.indexOf(commentToEdit);
+      const commentBody = action.comment.body;
+      newState[action.comment.post_id].comment[commentPosition]["body"] =
+        commentBody;
+      return newState;
+    }
     default:
       return state;
   }

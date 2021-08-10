@@ -23,9 +23,7 @@ export default function Post({ post }) {
   };
 
   const commentComponents = Object.values(post.comment).map((comment) => {
-    return (
-      <Comment key={comment.id} comment={comment}/>
-    );
+    return <Comment key={comment.id} comment={comment} />;
   });
 
   return (
@@ -44,7 +42,7 @@ export default function Post({ post }) {
             {edit === true && <UserPostForm post={post} />}
             <div className="crud-buttons">
               <button onClick={() => onEdit(post)}>
-                {edit === true ? "Done Editing?" : "Edit Post"}
+                {edit === true ? "CANCEL" : "Edit Post"}
               </button>
               <button onClick={() => onDelete(post)}>Delete Post</button>
             </div>

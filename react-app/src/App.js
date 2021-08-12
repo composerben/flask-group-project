@@ -8,6 +8,7 @@ import PostShow from "./components/PostShow/PostShow";
 import User from "./components/User/User";
 import PostForm from "./components/PostForm/PostForm";
 import Footer from "./components/Footer";
+import SplashPage from "./components/SplashPage";
 import { authenticate } from "./store/session";
 import { useDispatch } from "react-redux";
 
@@ -36,6 +37,9 @@ function App() {
         <Route path="/sign-up" exact={true}>
           <SignUpForm />
         </Route>
+        <Route path="/splash">
+          <SplashPage />
+        </Route>
         <ProtectedRoute path="/posts" exact={true}>
           <PostShow />
         </ProtectedRoute>
@@ -44,9 +48,6 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path="/users/:userId" exact={true}>
           <User />
-        </ProtectedRoute>
-        <ProtectedRoute path="/" exact={true}>
-          <h1>My Home Page</h1>
         </ProtectedRoute>
       </Switch>
       <Footer />

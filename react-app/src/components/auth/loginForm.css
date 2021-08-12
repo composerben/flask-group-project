@@ -1,3 +1,17 @@
+@media (max-width: 768px) {
+    .formItself {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    }
+
+    label {
+        display: none;
+    }
+}
+
 .parentForm{
     display: flex;
     align-items: center;

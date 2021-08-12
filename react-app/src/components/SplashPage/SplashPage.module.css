@@ -1,7 +1,55 @@
 .screenshot {
-    width: 50%;
+  width: 50%;
 }
 
 .screenshot__container {
-    padding: 0.25rem;
+  padding: 0.25rem;
+}
+
+.splash__container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+  align-self: center;
+}
+
+.login {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-content: center;
+  align-items: center;
+  box-shadow: brown 0px 4px 3px 2px;
+  border: solid 3px rgba(180, 180, 180);
+  border-radius: 15px;
+  padding: 2rem;
+}
+
+.signup {
+  box-shadow: brown 0px 4px 3px 2px;
+  border: solid 3px rgba(180, 180, 180);
+  border-radius: 15px;
+  padding: 2rem;
+}
+
+.authentication__container {
+    display: flex;
+}
+
+.login__button {
+    width: 100%;
+    background-color: #0099ff;
+    color: white;
+    text-align: center;
+    display: block;
+    box-sizing: border-box;
+    padding: 0.25rem 0rem;
+}
+
+.login__button-disabled {
+    background-color: #90d0fb;
 }

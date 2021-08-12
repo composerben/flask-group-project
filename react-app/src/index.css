@@ -8,3 +8,10 @@ h1 {
   text-align: center;
 }
 
+#root {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+}

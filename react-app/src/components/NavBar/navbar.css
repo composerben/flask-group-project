@@ -23,11 +23,6 @@ nav div a:active {
   color: white;
 }
 
-button {
-  background-color: black;
-  border: none;
-}
-
 .logoutButton {
   text-decoration: none;
   text-align: right;

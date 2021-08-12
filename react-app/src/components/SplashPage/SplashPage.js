@@ -41,7 +41,10 @@ export default function SplashPage() {
   return (
     <>
       <h1>Welcome to Like-or-Hate</h1>
-      <h3 className={style.splash__blurb}>Like Instagram, but you can delete posts by disliking...LET THE CHAOS UNFOLD</h3>
+      <h3 className={style.splash__blurb}>
+        Like Instagram, but you can delete posts by disliking...LET THE CHAOS
+        UNFOLD
+      </h3>
       <div className={style.splash__container}>
         <div className={style.screenshot__container}>
           <img
@@ -54,6 +57,11 @@ export default function SplashPage() {
           <div className={style.authentication__container}>
             <form className={style.login} onSubmit={submitLogin}>
               <h3>Like or Hate</h3>
+              <div className="errorsStuff">
+                {errors.map((error) => (
+                  <div key={error}>{error}</div>
+                ))}
+              </div>
               <input
                 name="email"
                 type="text"

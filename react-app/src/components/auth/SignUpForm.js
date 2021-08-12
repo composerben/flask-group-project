@@ -8,6 +8,7 @@ import "./loginForm.css";
 const SignUpForm = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
+  const [errors, setErrors] = useState([]);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,22 +18,28 @@ const SignUpForm = () => {
     e.preventDefault();
     if (password === repeatPassword) {
       await dispatch(signUp(username, email, password));
+    } else {
+      setErrors(["Passwords do not match"])
     }
   };
 
   const updateUsername = (e) => {
+    setErrors([]);
     setUsername(e.target.value);
   };
 
   const updateEmail = (e) => {
+    setErrors([]);
     setEmail(e.target.value);
   };
 
   const updatePassword = (e) => {
+    setErrors([]);
     setPassword(e.target.value);
   };
 
   const updateRepeatPassword = (e) => {
+    setErrors([]);
     setRepeatPassword(e.target.value);
   };
 
@@ -40,10 +47,18 @@ const SignUpForm = () => {
     return <Redirect to="/" />;
   }
 
+  console.log("Errors:", errors)
+
   return (
     <div className="parentForm">
       <h1>Sign up</h1>
       <form onSubmit={onSignUp} className="formItself">
+        <div className={errors.length >= 1 ? "errorsStuff" : "errorsStuff-hidden"}>
+          {errors.length > 1 ? "Error(s) found:" : "Error found:"}
+          {errors.map((error) => (
+            <li key={error}>{error}</li>
+          ))}
+        </div>
         <div className="form__field">
           <label>User Name</label>
           <input

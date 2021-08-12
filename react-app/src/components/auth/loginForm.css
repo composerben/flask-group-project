@@ -12,6 +12,14 @@
     }
 }
 
+.errorsStuff {
+    color: red;
+}
+
+.errorsStuff-hidden {
+    display: none;
+}
+
 .parentForm{
     display: flex;
     align-items: center;

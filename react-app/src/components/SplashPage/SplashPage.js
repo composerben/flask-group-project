@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 import { login } from "../../store/session";
 import ScreenShot from "./ScreenShot.png";
+import DemoUser from "../auth/DemoUser";
 
 export default function SplashPage() {
   const user = useSelector((state) => state.session?.user);
@@ -37,54 +38,57 @@ export default function SplashPage() {
     }
   };
 
-  console.log("Value for disabled", disabled)
-
   return (
-    <div className={style.splash__container}>
-      <div className={style.screenshot__container}>
-        <img
-          src={ScreenShot}
-          alt="capture of website in action"
-          className={style.screenshot}
-        />
+    <>
+      <h1>Welcome to Like-or-Hate</h1>
+      <h3 className={style.splash__blurb}>Like Instagram, but you can delete posts by disliking...LET THE CHAOS UNFOLD</h3>
+      <div className={style.splash__container}>
+        <div className={style.screenshot__container}>
+          <img
+            src={ScreenShot}
+            alt="capture of website in action"
+            className={style.screenshot}
+          />
+        </div>
+        {!user && (
+          <div className={style.authentication__container}>
+            <form className={style.login} onSubmit={submitLogin}>
+              <h3>Like or Hate</h3>
+              <input
+                name="email"
+                type="text"
+                placeholder="Email"
+                value={email}
+                onChange={updateEmail}
+                className={style.form__input}
+              />
+              <input
+                name="password"
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={updatePassword}
+                className={style.form__input}
+              />
+              <button
+                className={
+                  disabled
+                    ? style.login__button
+                    : `${style["login__button-disabled"]} ${style.login__button}`
+                }
+                type="submit"
+                disabled={!disabled}
+              >
+                Login
+              </button>
+              <DemoUser />
+            </form>
+            <div className={style.signup}>
+              Don't have an account? <Link to="/sign-up">Sign up</Link>
+            </div>
+          </div>
+        )}
       </div>
-      {!user && (
-        <div className={style.authentication__container}>
-        <form className={style.login} onSubmit={submitLogin}>
-          <h3>Like or Hate</h3>
-          <input
-            name="email"
-            type="text"
-            placeholder="Email"
-            value={email}
-            onChange={updateEmail}
-            className={style.form__input}
-          />
-          <input
-            name="password"
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={updatePassword}
-            className={style.form__input}
-          />
-          <button
-            className={
-              disabled
-                ? style.login__button
-                : `${style["login__button-disabled"]} ${style.login__button}`
-            }
-            type="submit"
-            disabled={disabled}
-          >
-            Login
-          </button>
-        </form>
-        <div className={style.signup}>
-          Don't have an account? <Link to="/sign-up">Sign up</Link>
-        </div>
-        </div>
-      )}
-    </div>
+    </>
   );
 }

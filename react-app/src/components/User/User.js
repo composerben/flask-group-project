@@ -30,7 +30,7 @@ function User() {
   }
 
   const postComponents = Object.values(userPosts).map((post) => {
-    return <Post post={post} />;
+    return <Post key={post.id} post={post} />;
   });
 
   return (

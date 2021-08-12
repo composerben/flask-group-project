@@ -14,7 +14,7 @@ function PostShow() {
 
   const postComponents = Object.values(statePosts).map((post) => {
     return post ? (
-      <div>
+      <div key={post?.id} >
         <Post key={post?.id} post={post} />
       </div>
     ) : (

@@ -24,13 +24,13 @@ export default function PostReaction({ postId }) {
     <div className="reactions-container">
       <div>
         <button className="like-button" onClick={() => onLike()}>
-          <i class="far fa-thumbs-up"></i>
+          <i className="far fa-thumbs-up"></i>
           <div className="reaction-counter">{likeCount}</div>
         </button>
       </div>
       <div>
         <button className="hate-button" onClick={() => onHate()}>
-          <i class="fas fa-skull-crossbones"></i>
+          <i className="fas fa-skull-crossbones"></i>
           <div className="reaction-counter">{hateCount}</div>
         </button>
       </div>

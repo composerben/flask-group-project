@@ -8,11 +8,13 @@ const NavBar = () => {
   const currentUser = useSelector((state) => state.session.user);
   return (
     <nav>
-      <div>
-        <NavLink to="/" exact={true} activeClassName="active">
-          Home
-        </NavLink>
-      </div>
+      {!currentUser && (
+        <div>
+          <NavLink to="/splash" exact={true} activeClassName="active">
+            Home
+          </NavLink>
+        </div>
+      )}
       <div>
         <NavLink to="/posts" exact={true} activeClassName="active">
           Posts

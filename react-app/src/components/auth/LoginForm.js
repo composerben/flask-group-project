@@ -3,7 +3,7 @@ import { Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../store/session";
 import DemoUser from "./DemoUser";
-import "./loginForm.css"
+import "./loginForm.css";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -29,7 +29,7 @@ const LoginForm = () => {
   };
 
   if (user) {
-    return <Redirect to="/" />;
+    return <Redirect to={`/users/${user.id}`} />;
   }
 
   return (
@@ -41,29 +41,33 @@ const LoginForm = () => {
             <div>{error}</div>
           ))}
         </div>
-        <div className="formFill">
-          <div>
-            <label htmlFor="email">Email</label>
-            <input
-              name="email"
-              type="text"
-              placeholder="Email"
-              value={email}
-              onChange={updateEmail}
-            />
-          </div>
-          <div>
-            <label htmlFor="password">Password</label>
-            <input
-              name="password"
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={updatePassword}
-            />
-            <button className="loginBtn" type="submit">Login</button>
-            <DemoUser />
-          </div>
+        <div className="form__field">
+          <label htmlFor="email">Email</label>
+          <input
+            name="email"
+            type="text"
+            placeholder="Email"
+            value={email}
+            onChange={updateEmail}
+            className="form__input"
+          />
+        </div>
+        <div className="form__field">
+          <label htmlFor="password">Password</label>
+          <input
+            name="password"
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={updatePassword}
+            className="form__input"
+          />
+        </div>
+        <div className="form__buttons">
+          <button className="form__button" type="submit">
+            Login
+          </button>
+          <DemoUser />
         </div>
       </form>
     </div>

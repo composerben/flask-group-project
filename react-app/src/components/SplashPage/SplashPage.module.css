@@ -24,8 +24,9 @@
   align-items: center;
   width: 60%;
   align-self: center;
-  margin-top: 20px;
-  margin-bottom: 40px;
+  /* margin-top: 20px;
+  margin-bottom: 40px; */
+  margin: 2.5rem;
 }
 
 .login {
@@ -37,7 +38,18 @@
   box-shadow: brown 0px 4px 3px 2px;
   border: solid 3px rgba(180, 180, 180);
   border-radius: 15px;
-  padding: 2rem;
+  padding: 1.5rem;
+}
+
+.login__header {
+  margin: 0;
+}
+
+.form__input {
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 1.25rem;
+  margin: 0.5rem 0rem;
 }
 
 .signup {
@@ -46,6 +58,7 @@
   border-radius: 15px;
   padding: 2rem;
   margin-top: 10px;
+  text-align: center;
 }
 
 .authentication__container {
@@ -66,4 +79,22 @@
 
 .login__button-disabled {
   background-color: #90d0fb;
+}
+
+.divider__container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  margin: 1rem 0rem;
+}
+
+.divider__text {
+  width: fit-content;
+}
+
+.divider {
+  height: 2px;
+  width: 8rem;
+  background-color: rgba(180, 180, 180);
+  margin: 0.5rem;
 }

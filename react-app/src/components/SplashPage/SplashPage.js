@@ -56,7 +56,7 @@ export default function SplashPage() {
         {!user && (
           <div className={style.authentication__container}>
             <form className={style.login} onSubmit={submitLogin}>
-              <h3>Like or Hate</h3>
+              <h2 className={style.login__header}>Like or Hate</h2>
               <div className="errorsStuff">
                 {errors.map((error) => (
                   <div key={error}>{error}</div>
@@ -89,6 +89,11 @@ export default function SplashPage() {
               >
                 Login
               </button>
+              <div className={style.divider__container}>
+                <div className={style.divider}></div>
+                <div className={style.divider__text}>OR</div>
+                <div className={style.divider}></div>
+              </div>
               <DemoUser />
             </form>
             <div className={style.signup}>

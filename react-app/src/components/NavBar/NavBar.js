@@ -15,11 +15,13 @@ const NavBar = () => {
           </NavLink>
         </div>
       )}
-      <div>
-        <NavLink to="/posts" exact={true} activeClassName="active">
-          Posts
-        </NavLink>
-      </div>
+      {currentUser && (
+        <div>
+          <NavLink to="/posts" exact={true} activeClassName="active">
+            Posts
+          </NavLink>
+        </div>
+      )}
       {!currentUser && (
         <>
           <div>

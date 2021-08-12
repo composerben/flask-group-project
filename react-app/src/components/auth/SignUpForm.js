@@ -3,7 +3,7 @@ import { Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { signUp } from "../../store/session";
 import DemoUser from "./DemoUser";
-import "./signUpForm.css"
+import "./loginForm.css";
 
 const SignUpForm = () => {
   const dispatch = useDispatch();
@@ -41,37 +41,40 @@ const SignUpForm = () => {
   }
 
   return (
-    <div className="massOfSignup">
+    <div className="parentForm">
       <h1>Sign up</h1>
-      <form onSubmit={onSignUp} className="theSignUpForm">
-        <div>
+      <form onSubmit={onSignUp} className="formItself">
+        <div className="form__field">
           <label>User Name</label>
           <input
             type="text"
             name="username"
             onChange={updateUsername}
             value={username}
+            className="form__input"
           ></input>
         </div>
-        <div>
+        <div className="form__field">
           <label>Email</label>
           <input
             type="text"
             name="email"
             onChange={updateEmail}
             value={email}
+            className="form__input"
           ></input>
         </div>
-        <div>
+        <div className="form__field">
           <label>Password</label>
           <input
             type="password"
             name="password"
             onChange={updatePassword}
             value={password}
+            className="form__input"
           ></input>
         </div>
-        <div>
+        <div className="form__field">
           <label>Repeat Password</label>
           <input
             type="password"
@@ -79,10 +82,15 @@ const SignUpForm = () => {
             onChange={updateRepeatPassword}
             value={repeatPassword}
             required={true}
+            className="form__input"
           ></input>
         </div>
-        <button className="YESYES" type="submit">Sign Up</button>
-        <DemoUser />
+        <div className="form__buttons">
+          <button className="form__button" type="submit">
+            Sign Up
+          </button>
+          <DemoUser />
+        </div>
       </form>
     </div>
   );

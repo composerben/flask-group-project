@@ -11,6 +11,7 @@ import Footer from "./components/Footer";
 import SplashPage from "./components/SplashPage";
 import { authenticate } from "./store/session";
 import { useDispatch } from "react-redux";
+import Page404 from "./components/404Page";
 
 function App() {
   const dispatch = useDispatch();
@@ -49,6 +50,9 @@ function App() {
         <ProtectedRoute path="/users/:userId" exact={true}>
           <User />
         </ProtectedRoute>
+        <Route>
+          <Page404 />
+        </Route>
       </Switch>
       <Footer />
     </BrowserRouter>

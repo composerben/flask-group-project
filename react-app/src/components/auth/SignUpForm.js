@@ -47,7 +47,7 @@ const SignUpForm = () => {
   };
 
   if (user) {
-    return <Redirect to="/" />;
+    return <Redirect to={`/users/${user.id}`} />;
   }
 
   console.log("Errors:", errors)

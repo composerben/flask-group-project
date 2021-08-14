@@ -29,17 +29,17 @@ export default function Comment({ comment }) {
   return (
     <div className={styles.comment}>
       <p className={styles.comment__header}>
-        Posted by: {commentAuthor?.username}
+        --Posted by: {commentAuthor?.username}
       </p>
       <p className={styles.comment__body}>{comment.body}</p>
       {authorId === user.id && (
         <>
           {edit === true && <EditCommentForm comment={comment} />}
           <div className={styles.buttons}>
-            <button onClick={onEdit}>
+            <button className={styles.edit__button} onClick={onEdit}>
               {edit === true ? "CANCEL" : "Edit Body"}
             </button>
-            <button onClick={onDelete}>Delete</button>
+            <button className={styles.delete__button}onClick={onDelete}>Delete</button>
           </div>
         </>
       )}

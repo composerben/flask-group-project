@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { postOnePost } from "../../store/post.js";
 import "./post-form.css";
+import "../auth/loginForm.css"
 
 export default function PostForm() {
   const [image, setImage] = useState(null);
@@ -38,17 +39,17 @@ export default function PostForm() {
   }
 
   return (
-    <div className="parentPostForm">
+    <div className="parentForm">
       <h1>create new post</h1>
-      <form onSubmit={submitForm} className="newPostForm">
-        <div>
+      <form onSubmit={submitForm} className="formItself">
+        <div className="form__field">
           <label htmlFor="image">Image: </label>
           <input
             onChange={updateImage}
             type="file"
             accept="image/*"
             placeholder="Upload image"
-            className="textspot"
+            className="form__input file-input"
           />
         </div>
         <div>
@@ -58,11 +59,11 @@ export default function PostForm() {
             onChange={(e) => newCaption(e.target.value)}
             type="textarea"
             placeholder="Enter caption here?"
-            className="textspot"
+            className="form__input"
           />
         </div>
         <div>
-          <button className="submit">Submit</button>
+          <button className="form__button">Submit</button>
           {imageLoading && <p>Loading...</p>}
         </div>
       </form>

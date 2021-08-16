@@ -67,7 +67,6 @@ def delete_posts(id):
 @post_routes.route("/<int:id>", methods=["PATCH"])
 @login_required
 def edit_post(id):
-    print("Made it into the edit_post route")
     post = Post.query.get(id)
     request_body = request.get_json()
     post.caption = request_body

@@ -1,0 +1,7 @@
+.edit__button {
+  border-radius: 30px;
+}
+
+.edit__button:hover {
+  background-color: rgb(175, 255, 211);
+}

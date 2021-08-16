@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { commentOneComment } from "../../store/comment.js";
-import "./CommentBody.css";
+import style from "./CommentBody.module.css";
 
 export default function CommentBody({ postId }) {
   const [body, setBody] = useState("");
@@ -25,7 +25,7 @@ export default function CommentBody({ postId }) {
         onChange={(e) => setBody(e.target.value)}
         placeholder="Tell strangers on the internet your useless thoughts"
       />
-      <button onClick={commentComment}>Submit Opinion</button>
+      <button className={style.edit__button} onClick={commentComment}>Submit Opinion</button>
     </div>
   );
 }

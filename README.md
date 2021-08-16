@@ -135,7 +135,7 @@ npm start
    ```
 
 5. Update the `REACT_APP_BASE_URL` variable in the Dockerfile.
-   This should be the full URL of your Heroku app: i.e. "https://flask-react-aa.herokuapp.com"
+   This should be the full URL of your Heroku app: i.e. "https://flask-react-app.herokuapp.com"
 6. [NON-M1 USERS] If not using an M1 Mac, continue with this step otherwise, skip ahead to the next step. Push your docker container to heroku from the root directory of your project.
    This will build the dockerfile and push the image to your heroku container registry
 

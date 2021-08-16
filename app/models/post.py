@@ -20,7 +20,6 @@ class Post(db.Model):
         """
         Gets all reactions, returns in dictionary.
         """
-        print([item.reaction for item in self.reactions])
         return {
             'likes': len([reaction.reaction for reaction in self.reactions if reaction.reaction is True]),
             'hates': len([reaction.reaction for reaction in self.reactions if reaction.reaction is False]),
@@ -37,5 +36,4 @@ class Post(db.Model):
             "likes": self.get_reactions()["likes"],
             "hates": self.get_reactions()["hates"],
             "comment": self.get_comments()
-            # "get_reactions": self.get_reactions(),
         }

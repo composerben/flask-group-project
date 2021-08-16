@@ -34,17 +34,19 @@ export default function Post({ post }) {
       <PostReaction postId={post.id} />
       <p>{post.caption}</p>
       <CommentBody postId={post.id} />
+      <div className="divider" />
       {commentComponents}
       <div>
-        {/* <Comment key={post.comment.id} comment={post.comment} /> */}
         {loggedInUser.id === post.user_id && (
           <>
             {edit === true && <UserPostForm post={post} />}
             <div className="crud-buttons">
-              <button onClick={() => onEdit(post)}>
+              <button className="edit__button" onClick={() => onEdit(post)}>
                 {edit === true ? "CANCEL" : "Edit Post"}
               </button>
-              <button onClick={() => onDelete(post)}>Delete Post</button>
+              <button className="delete__button" onClick={() => onDelete(post)}>
+                Delete Post
+              </button>
             </div>
           </>
         )}

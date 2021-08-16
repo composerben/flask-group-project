@@ -99,7 +99,7 @@ export default function Footer() {
             </g>
           </svg>
         </a>
-        <a href="linkedin.com/in/christianpettet">
+        <a href="https://linkedin.com/in/christianpettet">
           <svg className={style.linkedIn} viewBox="0 0 128 128">
             <path
               fill="#c9c9c9"

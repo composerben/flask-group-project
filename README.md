@@ -1,13 +1,17 @@
-# Flask React Project
+# Like-Or-Hate
+Like or hate is a 
 
 This is the backend for the Flask React project.
+
+## Database Diagram
+![like-or-hate](./assets/images/Like-Or-Hate.png)
 
 ## Getting started
 
 1. Clone this repository (only this branch)
 
    ```bash
-   git clone https://github.com/appacademy-starters/python-project-starter.git
+   git clone https://github.com/composerben/flask-group-project.git
    ```
 
 2. Install dependencies

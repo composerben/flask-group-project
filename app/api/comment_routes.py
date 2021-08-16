@@ -28,7 +28,6 @@ def delete_comments(id):
 @comment_routes.route("/<int:id>", methods=["PATCH"])
 @login_required
 def edit_comment(id):
-    print("Made it into the edit_comment route")
     comment = Comment.query.get(id)
     request_body = request.get_json()
     comment.body = request_body
@@ -41,7 +40,6 @@ def edit_comment(id):
 @comment_routes.route("", methods=["POST"])
 @login_required
 def post_comment():
-    print("Made it into the post_comment route")
     request_body = request.get_json()
     comment = Comment(user_id=current_user.id,
                       post_id=request_body['postId'], body=request_body['body'])

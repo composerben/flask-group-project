@@ -29,11 +29,7 @@ def postLike(post_id, reaction):
     if str(post_reaction.reaction) != reaction:
         post_reaction.reaction = reaction
         db.session.commit()
-        
-    # query joins table and get the count
-    # search by post_id, count true and count false
-    
-    # change count of likes/hates based on reaction
+
     count_likes = PostReaction.query.filter_by(post_id=post_id,
                                                reaction=True).count()
     count_hates = PostReaction.query.filter_by(post_id=post_id,

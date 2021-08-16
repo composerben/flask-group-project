@@ -39,7 +39,9 @@ export default function Comment({ comment }) {
             <button className={styles.edit__button} onClick={onEdit}>
               {edit === true ? "CANCEL" : "Edit Body"}
             </button>
-            <button className={styles.delete__button}onClick={onDelete}>Delete</button>
+            <button className={styles.delete__button} onClick={onDelete}>
+              Delete
+            </button>
           </div>
         </>
       )}
